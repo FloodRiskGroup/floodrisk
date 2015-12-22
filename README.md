@@ -14,6 +14,8 @@ The tool performs a simple risk assessment in which it consider fixed event scen
   - US Department of Homeland Security (DHS 2011)
   - SUFRI Methodology for pluvial and river flooding risk assessment (Escuder Bueno et al, 2011
 
+Example DataSet to test the plugin: https://github.com/FloodRiskGroup/FloodRisk-doc  
+  
 (1) *US Departement of Homeland Security (DHS). Dams Sector. Estimating Loss of Life for Dam Failure Scenarios, September 2011*
 
 (2) *SUFRI Methodology for pluvial and river flooding risk assessment in urban areas to inform decision-making. 2nd ERA-NET CRUE Research Funding Initiative Flood resilient communities – managing the consequences of flooding. Report, July 2011*
