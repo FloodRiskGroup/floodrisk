@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/plugins/floodrisk" >
+        <file>icons/iconafloodrisk.png</file>
+		<file>icons/1fp.png</file>
+        <file>icons/2db.png</file>
+        <file>icons/3ei.png</file>
+        <file>icons/4lol.png</file>
+        <file>icons/5h.png</file>
+		<file>icons/folder_explore.png</file>
+		<file>icons/table_go.png</file>
+		<file>icons/chart_bar.png</file>
+		<file>icons/red20.png</file>
+		<file>icons/green20.png</file>
+		<file>icons/images.jpg</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,40 @@
+# This file contains metadata for your plugin. Beginning
+# with version 1.8 this is the preferred way to supply information about a
+# plugin. The current method of embedding metadata in __init__.py will
+# be supported until version 2.0
+
+# This file should be included when you package your plugin.
+
+# Mandatory items:
+
+
+[general]
+name=Floodrisk
+qgisMinimumVersion=2.0
+description=Floodrisk is an Open Source software to combine the main features of state-of-the-art science, collaboration, transparency and interoperability in an initiative to assist authorities for flood risk analysis and management
+about=Developed by RSE & University of Basilicata
+version=0.1
+author=RiskGroup
+email=FloodRiskGroup@rse-web.it
+
+# end of mandatory metadata
+
+# Optional items:
+
+# Uncomment the following line and add your changelog entries:
+# changelog=
+
+# tags are comma separated with spaces allowed
+tags=
+
+homepage=
+tracker=https://github.com/FloodRiskGroup/floodrisk/issues
+repository=https://github.com/FloodRiskGroup/floodrisk.git
+ExampleDataset=https://github.com/FloodRiskGroup/FloodRisk-doc
+icon=icons\iconafloodrisk.png
+# experimental flag
+experimental=False
+
+# deprecated flag (applies to the whole plugin, not just a single version
+deprecated=False
+

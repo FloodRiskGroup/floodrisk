@@ -1,0 +1,152 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'ui_creaprogetto.ui'
+#
+# Created: Wed Apr 29 08:44:37 2015
+#      by: PyQt4 UI code generator 4.10.4
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
+
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
+
+class Ui_FloodRisk(object):
+    def setupUi(self, FloodRisk):
+        FloodRisk.setObjectName(_fromUtf8("FloodRisk"))
+        FloodRisk.resize(641, 476)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(_fromUtf8("../icons/1.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        FloodRisk.setWindowIcon(icon)
+        self.label = QtGui.QLabel(FloodRisk)
+        self.label.setGeometry(QtCore.QRect(10, 80, 301, 18))
+        self.label.setObjectName(_fromUtf8("label"))
+        self.txtShellFilePath = QtGui.QLineEdit(FloodRisk)
+        self.txtShellFilePath.setGeometry(QtCore.QRect(10, 100, 531, 26))
+        self.txtShellFilePath.setObjectName(_fromUtf8("txtShellFilePath"))
+        self.label_2 = QtGui.QLabel(FloodRisk)
+        self.label_2.setGeometry(QtCore.QRect(10, 140, 301, 18))
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.btnChooseShellFile_2 = QtGui.QPushButton(FloodRisk)
+        self.btnChooseShellFile_2.setGeometry(QtCore.QRect(560, 160, 71, 28))
+        self.btnChooseShellFile_2.setText(_fromUtf8(""))
+        self.btnChooseShellFile_2.setObjectName(_fromUtf8("btnChooseShellFile_2"))
+        self.txtShellFilePath_2 = QtGui.QLineEdit(FloodRisk)
+        self.txtShellFilePath_2.setGeometry(QtCore.QRect(10, 160, 531, 26))
+        self.txtShellFilePath_2.setObjectName(_fromUtf8("txtShellFilePath_2"))
+        self.label_3 = QtGui.QLabel(FloodRisk)
+        self.label_3.setGeometry(QtCore.QRect(10, 200, 301, 18))
+        self.label_3.setObjectName(_fromUtf8("label_3"))
+        self.btnChooseShellFile_3 = QtGui.QPushButton(FloodRisk)
+        self.btnChooseShellFile_3.setGeometry(QtCore.QRect(560, 220, 71, 28))
+        self.btnChooseShellFile_3.setText(_fromUtf8(""))
+        self.btnChooseShellFile_3.setObjectName(_fromUtf8("btnChooseShellFile_3"))
+        self.pushButtonSalvaProgetto = QtGui.QPushButton(FloodRisk)
+        self.pushButtonSalvaProgetto.setEnabled(True)
+        self.pushButtonSalvaProgetto.setGeometry(QtCore.QRect(10, 400, 141, 31))
+        self.pushButtonSalvaProgetto.setObjectName(_fromUtf8("pushButtonSalvaProgetto"))
+        self.btnChooseShellFile_1 = QtGui.QPushButton(FloodRisk)
+        self.btnChooseShellFile_1.setGeometry(QtCore.QRect(560, 100, 71, 28))
+        self.btnChooseShellFile_1.setText(_fromUtf8(""))
+        self.btnChooseShellFile_1.setObjectName(_fromUtf8("btnChooseShellFile_1"))
+        self.pushButtonLoadLayer = QtGui.QPushButton(FloodRisk)
+        self.pushButtonLoadLayer.setGeometry(QtCore.QRect(380, 400, 251, 31))
+        self.pushButtonLoadLayer.setObjectName(_fromUtf8("pushButtonLoadLayer"))
+        self.horizontalLayoutWidget = QtGui.QWidget(FloodRisk)
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 440, 621, 31))
+        self.horizontalLayoutWidget.setObjectName(_fromUtf8("horizontalLayoutWidget"))
+        self.horizontalLayout = QtGui.QHBoxLayout(self.horizontalLayoutWidget)
+        self.horizontalLayout.setMargin(0)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.buttonBox = QtGui.QDialogButtonBox(self.horizontalLayoutWidget)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.buttonBox.sizePolicy().hasHeightForWidth())
+        self.buttonBox.setSizePolicy(sizePolicy)
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Help|QtGui.QDialogButtonBox.Ok)
+        self.buttonBox.setCenterButtons(False)
+        self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
+        self.horizontalLayout.addWidget(self.buttonBox)
+        self.btnChooseShellFile_velocita = QtGui.QPushButton(FloodRisk)
+        self.btnChooseShellFile_velocita.setGeometry(QtCore.QRect(560, 280, 71, 28))
+        self.btnChooseShellFile_velocita.setText(_fromUtf8(""))
+        self.btnChooseShellFile_velocita.setObjectName(_fromUtf8("btnChooseShellFile_velocita"))
+        self.label_9 = QtGui.QLabel(FloodRisk)
+        self.label_9.setGeometry(QtCore.QRect(10, 260, 301, 18))
+        self.label_9.setObjectName(_fromUtf8("label_9"))
+        self.label_10 = QtGui.QLabel(FloodRisk)
+        self.label_10.setGeometry(QtCore.QRect(10, 320, 301, 18))
+        self.label_10.setObjectName(_fromUtf8("label_10"))
+        self.btnChooseShellFile_tempi = QtGui.QPushButton(FloodRisk)
+        self.btnChooseShellFile_tempi.setGeometry(QtCore.QRect(560, 340, 71, 28))
+        self.btnChooseShellFile_tempi.setText(_fromUtf8(""))
+        self.btnChooseShellFile_tempi.setObjectName(_fromUtf8("btnChooseShellFile_tempi"))
+        self.label_4 = QtGui.QLabel(FloodRisk)
+        self.label_4.setGeometry(QtCore.QRect(10, 10, 131, 16))
+        self.label_4.setObjectName(_fromUtf8("label_4"))
+        self.comboBox = QtGui.QComboBox(FloodRisk)
+        self.comboBox.setGeometry(QtCore.QRect(10, 30, 621, 22))
+        self.comboBox.setObjectName(_fromUtf8("comboBox"))
+        self.pushButtonSalvaProgettoAs = QtGui.QPushButton(FloodRisk)
+        self.pushButtonSalvaProgettoAs.setEnabled(True)
+        self.pushButtonSalvaProgettoAs.setGeometry(QtCore.QRect(160, 400, 211, 31))
+        self.pushButtonSalvaProgettoAs.setObjectName(_fromUtf8("pushButtonSalvaProgettoAs"))
+        self.comboBox_2 = QtGui.QComboBox(FloodRisk)
+        self.comboBox_2.setEnabled(True)
+        self.comboBox_2.setGeometry(QtCore.QRect(10, 220, 531, 22))
+        self.comboBox_2.setEditable(True)
+        self.comboBox_2.setDuplicatesEnabled(False)
+        self.comboBox_2.setFrame(True)
+        self.comboBox_2.setObjectName(_fromUtf8("comboBox_2"))
+        self.comboBox_3 = QtGui.QComboBox(FloodRisk)
+        self.comboBox_3.setEnabled(True)
+        self.comboBox_3.setGeometry(QtCore.QRect(10, 280, 531, 22))
+        self.comboBox_3.setEditable(True)
+        self.comboBox_3.setObjectName(_fromUtf8("comboBox_3"))
+        self.comboBox_4 = QtGui.QComboBox(FloodRisk)
+        self.comboBox_4.setEnabled(True)
+        self.comboBox_4.setGeometry(QtCore.QRect(10, 340, 531, 22))
+        self.comboBox_4.setEditable(True)
+        self.comboBox_4.setObjectName(_fromUtf8("comboBox_4"))
+        self.line = QtGui.QFrame(FloodRisk)
+        self.line.setGeometry(QtCore.QRect(10, 380, 621, 16))
+        self.line.setFrameShape(QtGui.QFrame.HLine)
+        self.line.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line.setObjectName(_fromUtf8("line"))
+        self.line_6 = QtGui.QFrame(FloodRisk)
+        self.line_6.setGeometry(QtCore.QRect(10, 60, 621, 16))
+        self.line_6.setFrameShape(QtGui.QFrame.HLine)
+        self.line_6.setFrameShadow(QtGui.QFrame.Sunken)
+        self.line_6.setObjectName(_fromUtf8("line_6"))
+
+        self.retranslateUi(FloodRisk)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), FloodRisk.accept)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), FloodRisk.reject)
+        QtCore.QMetaObject.connectSlotsByName(FloodRisk)
+
+    def retranslateUi(self, FloodRisk):
+        FloodRisk.setWindowTitle(_translate("FloodRisk", "FloodRisk | Project management", None))
+        self.label.setText(_translate("FloodRisk", "Project (.dmg) File:", None))
+        self.label_2.setText(_translate("FloodRisk", "SpatiaLite Geodatabase:", None))
+        self.label_3.setText(_translate("FloodRisk", "Water Depth Raster Layer:", None))
+        self.pushButtonSalvaProgetto.setText(_translate("FloodRisk", "Save Project", None))
+        self.pushButtonLoadLayer.setText(_translate("FloodRisk", "Add all Layers to Map Canvas", None))
+        self.label_9.setText(_translate("FloodRisk", "Flow velocity Raster Layer:", None))
+        self.label_10.setText(_translate("FloodRisk", "Warning Time Vector Layer:", None))
+        self.label_4.setText(_translate("FloodRisk", "Recent Projects:", None))
+        self.pushButtonSalvaProgettoAs.setText(_translate("FloodRisk", "Save Project As...", None))
+

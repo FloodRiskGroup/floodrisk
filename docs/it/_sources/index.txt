@@ -1,0 +1,59 @@
+.. FloodRisk documentation master file, created by
+   sphinx-quickstart on Wed Mar 18 17:06:27 2015.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Benvenuti alla documentazione di FloodRisk
+==========================================
+.. image:: Logo_RSE.png
+   :height: 100px
+   :width: 200 px
+   :scale: 50 %
+   :target: http://www.rse-web.it
+
+.. image:: UnibasSI.jpg
+   :height: 100px
+   :width: 200 px
+   :scale: 50 %
+   :target: http://ingegneria.unibas.it/site/home.html
+
+FloodRisk
+*********
+.. topic::  Cos'è FloodRisk ?
+
+    **FloodRisk** è un *plugin per QGIS*  che consete la stime delle conseguenze di un'inondazione,
+    in termini di perdite di vite e di danni economici diretti.
+
+.. topic:: Il termine RISCHIO  :  Rischio = (Probabilità) x (Conseguenze)
+
+	.. image:: Risk.jpg
+
+.. topic:: FloodRisk riguarda la stima delle conseguenze
+
+	.. image:: Consequences.jpg    
+
+Il Plug-in
+**********
+
+	
+Contenuti:
+
+.. toctree::
+   :maxdepth: 2
+
+   include1
+   include2
+   include3
+   include4
+   
+Indice e tabelle
+================
+
+* :ref:`genindex`
+* :ref:`search`
+
+Riferimenti bibliografici
+=========================
+
+#. Mancusi, L., Albano, R., Sole, A. *"FloodRisk: a QGIS plugin for flood consequences estimation"*,  Geomatics Workbooks n° 12 – FOSS4G Europe Como 2015 :download:`pdf <FOSS4G-E_2015_FloodRisk.pdf>`
+

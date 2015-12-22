@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Stima delle perdite di vite &mdash; floodrisk 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="floodrisk 0.1 documentation" href="index.html" />
+    <link rel="prev" title="Danni Economici Diretti" href="include3.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="include3.html" title="Danni Economici Diretti"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">floodrisk 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="stima-delle-perdite-di-vite">
+<h1>Stima delle perdite di vite<a class="headerlink" href="#stima-delle-perdite-di-vite" title="Permalink to this headline">¶</a></h1>
+<p>La finestra <strong>Stima delle perdite di vite</strong> consente di valutare la mappa della <strong>popolazione a rischio</strong> ed il <strong>numero di potenziali vittime</strong>.
+La mappa della popolazione a rischio è ottenuta mediante sovrapposizione della mappa dell&#8217;inondazione e quella della densità di popolazione.
+Una volta che sia ottenuta la mappa della popolazione a rischio, il numero di potenziali perdite di vite è ottenuta motiplicando la popolazione a rishio per la <em>percentuale di perdite*</em> <em>(*fatality rate)</em>.</p>
+<blockquote>
+<div><img alt="_images/LossOfLIfe.jpg" src="_images/LossOfLIfe.jpg" />
+</div></blockquote>
+<ol class="arabic simple">
+<li>I dati riguardanti <strong>popolazione</strong> e la loro <strong>vulnerabilità</strong> sono memorizzati nel geodatabase.</li>
+<li>I dati riguardanti il <strong>pericolo</strong> sono mappe di <strong>altezza massime</strong>  e <strong>velocità massime</strong> dovute all&#8217;inondazione.
+Questi dati sono output di modelli idraulici 2D e  sono caricarti nel sistema tramite un qualsiasi file del tipo <strong>GDAL Raster Formats</strong>.</li>
+<li>Un ulteriore dato necessario per la valutazione della vulnerabilità è la mappa dei <strong>tempi di preavviso</strong>.
+Il tempo di preavviso indica la quantità di tempo che intercorre fra la ricezione dell&#8217;avviso e l&#8217;istante in cui la popolazione e ogni struttura è interessato dall&#8217;evento di inondazione.
+Questi dati devono essere del tipo <strong>shapefile di poligoni</strong> avente il campo <em>&#8220;TimeHours&#8221;</em> contenente il valore del tempo di prevviso in ore.</li>
+<li>I risultati sono mappe della <strong>popolazione a rischio</strong> ed in <strong>numero di potenziali vittime</strong> ed una <strong>Tabella Riassuntiva</strong> dei risultati che può essere visualizzata anche in forma grafica (istogramma).</li>
+</ol>
+<p>I file  dei risultati sono:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Layer della popolazione a rishio <em>(*_pop.tif)</em>:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><p class="first">un file tipo <em>GeoTIFF File Format</em> avente come output due <em>bande</em>:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">band1:</th><td class="field-body"><em>densità della popolazione a rischio</em> (persone per km quadrato)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">band2:</th><td class="field-body"><em>densità di perdite di vite</em> (persone per km quadrato)</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Tabella Riassuntiva <em>(*_pop.csv)</em>:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><p class="first last">un file tipo <em>csv File Format</em> contenete la tabella dei risultati raggruppato per <em>Intervalli di altezze d&#8217;acqua</em></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="include3.html"
+                        title="previous chapter">Danni Economici Diretti</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/include4.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="include3.html" title="Danni Economici Diretti"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">floodrisk 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, L.Mancusi/RSE S.p.A..
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

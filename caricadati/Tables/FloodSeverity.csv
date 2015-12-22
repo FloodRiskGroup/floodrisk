@@ -1,0 +1,4 @@
+num;Fseverity;DV (m3/s);hrate (m/5min)
+1;LOW;5;0
+2;MEDIUM;15;0
+3;HIGHT;99999;3

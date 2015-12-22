@@ -1,0 +1,22 @@
+IND;NumDomain;code;Description;Valstr;Valcon
+1;10;11100;Continuous Urban Fabric (S.L. > 80%);1520;760
+2;10;11210;Discontinuous Dense Urban Fabric (S.L. : 50% -  80%);650;325
+3;10;11220;Discontinuous Medium Density Urban Fabric (S.L. : 30% - 50%);400;200
+4;10;11230;Discontinuous Low Density Urban Fabric (S.L. : 10% - 30%);200;100
+5;10;11240;Discontinuous Very Low Density Urban Fabric (S.L. < 10%);100;50
+6;10;11300;Isolated Structures;25;37.5
+7;10;12100;Industrial, commercial, public, military and private units;560;1960
+8;10;12210;Fast transit roads and associated land;2600;104
+9;10;12220;Other roads and associated land;1550;62
+10;10;12230;Railways and associated land;9270;463.5
+11;10;12300;Port areas;10300;515
+12;10;12400;Airports;10300;515
+13;10;13100;Mineral extraction and dump sites;0;0
+14;10;13300;Construction sites;0;1
+15;10;13400;Land without current use;0;0
+16;10;14100;Green urban areas;0;0.2
+17;10;14200;Sports and leisure facilities;700;1400
+18;10;20000;Agricultural + Semi-natural areas + Wetlands;0;0.2
+19;10;30000;Forests;0;0.2
+20;10;40000;Wetlands;0;0
+21;10;50000;Water bodies;0;0

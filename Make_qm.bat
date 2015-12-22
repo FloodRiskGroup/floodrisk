@@ -1,0 +1,1 @@
+c:\OSGeo4W\bin\lrelease.exe floodrisk_it.ts
