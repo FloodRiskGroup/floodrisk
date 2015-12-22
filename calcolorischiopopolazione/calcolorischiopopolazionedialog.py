@@ -459,7 +459,7 @@ class calcolorischiopopolazioneDialog(QtGui.QDialog, Ui_FloodRisk):
         filePath=str(self.txtShellFilePath_2.text())
         if os.path.exists(filePath):
             # case geodatabase
-            tabelle=['PropertyPoly','InfrastrLines','CensusBlocks']
+            tabelle=['StructurePoly','InfrastrLines','CensusBlocks']
             for nomelayer in tabelle:
                 # checks if the layer is already loaded
                 if not LayerCaricato(self,nomelayer):
