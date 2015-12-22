@@ -27,7 +27,7 @@ email=FloodRiskGroup@rse-web.it
 # tags are comma separated with spaces allowed
 tags=
 
-homepage=
+homepage=https://github.com/FloodRiskGroup/floodrisk.git
 tracker=https://github.com/FloodRiskGroup/floodrisk/issues
 repository=https://github.com/FloodRiskGroup/floodrisk.git
 ExampleDataset=https://github.com/FloodRiskGroup/FloodRisk-doc
