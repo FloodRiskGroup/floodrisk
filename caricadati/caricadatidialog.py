@@ -29,7 +29,6 @@ import CaricaGeodatiFloodRisk
 import CaricaCurve
 from qgis.gui import QgsGenericProjectionSelector
 from pyspatialite import dbapi2 as db
-from PIL import Image
 from time import sleep
 import sys
 import os
