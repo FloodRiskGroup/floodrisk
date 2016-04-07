@@ -44,6 +44,24 @@ from pyspatialite import dbapi2 as db
 # module for reading csv files
 import csv
 
+from urllib import urlencode
+from urllib2 import urlopen
+import json
+
+def NumEPSGFromOpenGeo(prj_txt):
+
+    #Ok, no luck, lets try with the OpenGeo service
+    query = urlencode({
+        'exact' : True,
+        'error' : True,
+        'mode' : 'wkt',
+        'terms' : prj_txt})
+    webres = urlopen('http://prj2epsg.org/search.json', query)
+    jres = json.loads(webres.read())
+    if jres['codes']:
+        NumEPSG = int(jres['codes'][0]['code'])
+
+    return NumEPSG
 
 def NewGeom(raw_geom,typeTab,NumEPSG):
 
@@ -144,14 +162,18 @@ def UploadLayerInSQL(layer,TargetEPSG,GeomAreawkt,NomeTabella,NameField,TypeFiel
 
     carmin=0
 
-    try:
-        spatialRef = layer.GetSpatialRef()
-        # looking for the code of the reference system
-        spatialRef.AutoIdentifyEPSG()
-        NumEPSG= int(spatialRef.GetAuthorityCode(None))
-    except:
-        NumEPSG=32632 # WGS84 UTM 32
-
+    spatialRef = layer.GetSpatialRef()
+    # looking for the code of the reference system
+    spatialRef.AutoIdentifyEPSG()
+    NumEPSG= spatialRef.GetAuthorityCode(None)
+    if NumEPSG==None:
+        prj_txt=spatialRef.ExportToPrettyWkt()
+        NumEPSG=NumEPSGFromOpenGeo(prj_txt)
+    else:
+        try:
+            NumEPSG=int(NumEPSG)
+        except:
+            pass
 
     numFeatures = layer.GetFeatureCount()
 
@@ -350,6 +372,16 @@ def main(self,FilesList,UpLoad, bar):
         spatialRef = Inlayer.GetSpatialRef()
         spatialRef.AutoIdentifyEPSG()
         NumEPSG= spatialRef.GetAuthorityCode(None)
+        if NumEPSG==None:
+            prj_txt=spatialRef.ExportToPrettyWkt()
+            NumEPSG=NumEPSGFromOpenGeo(prj_txt)
+        else:
+            try:
+                NumEPSG=int(NumEPSG)
+            except:
+                pass
+
+
         feat = Inlayer.GetNextFeature()
         geom_class = feat.GetGeometryRef()
         layer_geom_type = geom_class.GetGeometryType()
@@ -502,7 +534,16 @@ def main(self,FilesList,UpLoad, bar):
         # looking for the code of the reference system
         spatialRef = Inlayer.GetSpatialRef()
         spatialRef.AutoIdentifyEPSG()
-        NumEPSG= int(spatialRef.GetAuthorityCode(None))
+        NumEPSG= spatialRef.GetAuthorityCode(None)
+        if NumEPSG==None:
+            prj_txt=spatialRef.ExportToPrettyWkt()
+            NumEPSG=NumEPSGFromOpenGeo(prj_txt)
+        else:
+            try:
+                NumEPSG= int(NumEPSG)
+            except:
+                pass
+
 
         SpatialFilter=ogr.CreateGeometryFromWkt(GeomAreawkt)
 
@@ -781,7 +822,16 @@ def main(self,FilesList,UpLoad, bar):
         # looking for the code of the reference system
         spatialRef = Inlayer.GetSpatialRef()
         spatialRef.AutoIdentifyEPSG()
-        NumEPSG= int(spatialRef.GetAuthorityCode(None))
+        NumEPSG= spatialRef.GetAuthorityCode(None)
+        if NumEPSG==None:
+            prj_txt=spatialRef.ExportToPrettyWkt()
+            NumEPSG=NumEPSGFromOpenGeo(prj_txt)
+        else:
+            try:
+                NumEPSG=int(NumEPSG)
+            except:
+                pass
+
 
         SpatialFilter=ogr.CreateGeometryFromWkt(GeomAreawkt)
 
@@ -978,7 +1028,17 @@ def main(self,FilesList,UpLoad, bar):
         # looking for the code of the reference system
         spatialRef = Inlayer.GetSpatialRef()
         spatialRef.AutoIdentifyEPSG()
-        NumEPSG= int(spatialRef.GetAuthorityCode(None))
+        NumEPSG= spatialRef.GetAuthorityCode(None)
+
+        if NumEPSG==None:
+            prj_txt=spatialRef.ExportToPrettyWkt()
+            NumEPSG=NumEPSGFromOpenGeo(prj_txt)
+        else:
+            try:
+                NumEPSG=int(NumEPSG)
+            except:
+                pass
+
         print NumEPSG
 
         SpatialFilter=ogr.CreateGeometryFromWkt(GeomAreawkt)
