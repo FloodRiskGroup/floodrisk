@@ -4,17 +4,17 @@
 <context>
     <name></name>
     <message>
-        <location filename="caricadati/CreaGeodatabase.py" line="31"/>
+        <location filename="caricadati/CreaGeodatabase.py" line="39"/>
         <source>Attention file</source>
         <translation>Attenzione il file</translation>
     </message>
     <message>
-        <location filename="caricadati/CreaGeodatabase.py" line="32"/>
+        <location filename="caricadati/CreaGeodatabase.py" line="40"/>
         <source>already exists: execution stopped</source>
         <translation>esiste già escuzione arrestata</translation>
     </message>
     <message>
-        <location filename="caricadati/CreaGeodatabase.py" line="34"/>
+        <location filename="caricadati/CreaGeodatabase.py" line="42"/>
         <source>Make Database</source>
         <translation>Crea Database</translation>
     </message>
@@ -280,100 +280,100 @@
 <context>
     <name>TableViewer</name>
     <message>
-        <location filename="calcolorischiopopolazione/tableViewer_gui.py" line="159"/>
-        <source>Drawing table</source>
-        <translation>Scrittura della tabella</translation>
-    </message>
-    <message>
-        <location filename="calcolodanno/tableViewer_gui.py" line="130"/>
+        <location filename="calcolorischiopopolazione/tableViewer_gui.py" line="180"/>
         <source>Warning the file</source>
         <translation>Attenzione il file</translation>
     </message>
     <message>
-        <location filename="calcolodanno/tableViewer_gui.py" line="131"/>
+        <location filename="calcolorischiopopolazione/tableViewer_gui.py" line="181"/>
         <source>does not exists</source>
         <translation>non esiste</translation>
+    </message>
+    <message>
+        <location filename="calcolorischiopopolazione/tableViewer_gui.py" line="261"/>
+        <source>Drawing table</source>
+        <translation>Scrittura della tabella</translation>
     </message>
 </context>
 <context>
     <name>calcolodannoDialog</name>
     <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="155"/>
+        <location filename="calcolodanno/calcolodannodialog.py" line="196"/>
         <source>Attention</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="155"/>
+        <location filename="calcolodanno/calcolodannodialog.py" line="196"/>
         <source>Warning you are editing the data input to the project: current data of output will be deleted. Are you sure?</source>
         <translation>Attenzione state modificando dei dati di input al progetto: i dati attuali di output saranno cancellati. Sei sicuro?</translation>
     </message>
     <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="158"/>
+        <location filename="calcolodanno/calcolodannodialog.py" line="199"/>
         <source>Select peak flow depth file</source>
         <translation>Seleziona il file delle massime altezza d&apos;acqua</translation>
     </message>
     <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="495"/>
-        <source>Warning the file</source>
-        <translation>Attenzione il file</translation>
-    </message>
-    <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="496"/>
-        <source>does not exists</source>
-        <translation>non esiste</translation>
-    </message>
-    <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="271"/>
-        <source>Attention assign a name to file</source>
-        <translation>Attenzione assegna un nome al file</translation>
-    </message>
-    <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="283"/>
-        <source>Damage assessment</source>
-        <translation>Valutazione danno</translation>
-    </message>
-    <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="293"/>
-        <source>End of Job</source>
-        <translation>Run eseguito</translation>
-    </message>
-    <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="305"/>
-        <source>Run not executed</source>
-        <translation>Run non eseguito</translation>
-    </message>
-    <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="404"/>
-        <source>Project Saved</source>
-        <translation>Progetto Salvato</translation>
-    </message>
-    <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="490"/>
-        <source>Damage assessment results</source>
-        <translation>Risultati valutazione danno</translation>
-    </message>
-    <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="491"/>
-        <source>Content Damage</source>
-        <translation>Danni al contenuto</translation>
-    </message>
-    <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="491"/>
-        <source>Structure Damage</source>
-        <translation>Danni al contenuto</translation>
-    </message>
-    <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="251"/>
-        <source>Warning the Depth-Damage Curves Type</source>
-        <translation>Attenzione il tipo di curva Altezza-Danno</translation>
-    </message>
-    <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="219"/>
+        <location filename="calcolodanno/calcolodannodialog.py" line="259"/>
         <source>Error in table Vulnerability</source>
         <translation>Errore nella tabella Vulnerability</translation>
     </message>
     <message>
-        <location filename="calcolodanno/calcolodannodialog.py" line="576"/>
+        <location filename="calcolodanno/calcolodannodialog.py" line="292"/>
+        <source>Warning the Depth-Damage Curves Type</source>
+        <translation>Attenzione il tipo di curva Altezza-Danno</translation>
+    </message>
+    <message>
+        <location filename="calcolodanno/calcolodannodialog.py" line="572"/>
+        <source>does not exists</source>
+        <translation>non esiste</translation>
+    </message>
+    <message>
+        <location filename="calcolodanno/calcolodannodialog.py" line="571"/>
+        <source>Warning the file</source>
+        <translation>Attenzione il file</translation>
+    </message>
+    <message>
+        <location filename="calcolodanno/calcolodannodialog.py" line="312"/>
+        <source>Attention assign a name to file</source>
+        <translation>Attenzione assegna un nome al file</translation>
+    </message>
+    <message>
+        <location filename="calcolodanno/calcolodannodialog.py" line="324"/>
+        <source>Damage assessment</source>
+        <translation>Valutazione danno</translation>
+    </message>
+    <message>
+        <location filename="calcolodanno/calcolodannodialog.py" line="336"/>
+        <source>End of Job</source>
+        <translation>Run eseguito</translation>
+    </message>
+    <message>
+        <location filename="calcolodanno/calcolodannodialog.py" line="349"/>
+        <source>Run not executed</source>
+        <translation>Run non eseguito</translation>
+    </message>
+    <message>
+        <location filename="calcolodanno/calcolodannodialog.py" line="492"/>
+        <source>Project Saved</source>
+        <translation>Progetto Salvato</translation>
+    </message>
+    <message>
+        <location filename="calcolodanno/calcolodannodialog.py" line="563"/>
+        <source>Damage assessment results</source>
+        <translation>Risultati valutazione danno</translation>
+    </message>
+    <message>
+        <location filename="calcolodanno/calcolodannodialog.py" line="565"/>
+        <source>Content Damage</source>
+        <translation>Danni al contenuto</translation>
+    </message>
+    <message>
+        <location filename="calcolodanno/calcolodannodialog.py" line="565"/>
+        <source>Structure Damage</source>
+        <translation>Danni alla struttura</translation>
+    </message>
+    <message>
+        <location filename="calcolodanno/calcolodannodialog.py" line="666"/>
         <source>You must first create the Geodb.Sqlite</source>
         <translation>Occorre prima creare il Geodatabase Sqlite</translation>
     </message>
@@ -381,107 +381,107 @@
 <context>
     <name>calcolorischiopopolazioneDialog</name>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="180"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="223"/>
         <source>Attention</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="180"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="223"/>
         <source>Warning you are editing the data input to the project: current data of output will be deleted. Are you sure?</source>
         <translation>Attenzione state modificando dei dati di input al progetto: i dati attuali di output saranno cancellati. Sei sicuro?</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="172"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="215"/>
         <source>Select warning time shape file</source>
         <translation>Seleziona lo shapefile dei tempi di preavviso</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="183"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="226"/>
         <source>Select peak flow depth file</source>
         <translation>Seleziona il file delle massime altezza d&apos;acqua</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="254"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="298"/>
         <source>Error the file</source>
         <translation>Errore il file</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="255"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="299"/>
         <source>does not exist</source>
         <translation>non esiste</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="262"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="306"/>
         <source>Attention assign a name to file</source>
         <translation>Attenzione assegna un nome al file</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="278"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="322"/>
         <source>Population consequences assessment</source>
         <translation>Valutazione delle conseguenze per la popolazione</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="290"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="335"/>
         <source>End of Job</source>
         <translation>Run eseguito</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="308"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="354"/>
         <source>Run not executed</source>
         <translation>Run non eseguito</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="421"/>
-        <source>Project Saved</source>
-        <translation>Progetto Salvato</translation>
-    </message>
-    <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="511"/>
-        <source>Range water depth (m)</source>
-        <translation>Intervallo di altezze d&apos;acqua (m)</translation>
-    </message>
-    <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="511"/>
-        <source>Number people</source>
-        <translation>Numero di persone</translation>
-    </message>
-    <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="511"/>
-        <source>Consequences for the population</source>
-        <translation>Conseguenze per la pololazione</translation>
-    </message>
-    <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="512"/>
-        <source>Loss of Life</source>
-        <translation>Perdite di vite</translation>
-    </message>
-    <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="512"/>
-        <source>Total Polpulation at Risk</source>
-        <translation>Totale popolazione a rishio</translation>
-    </message>
-    <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="706"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="854"/>
         <source>You must first create the Geodb.Sqlite</source>
         <translation>Occorre prima creare il Geodatabase Sqlite</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="693"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="501"/>
+        <source>Project Saved</source>
+        <translation>Progetto Salvato</translation>
+    </message>
+    <message>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="617"/>
+        <source>Range water depth (m)</source>
+        <translation>Intervallo di altezze d&apos;acqua (m)</translation>
+    </message>
+    <message>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="617"/>
+        <source>Number people</source>
+        <translation>Numero di persone</translation>
+    </message>
+    <message>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="617"/>
+        <source>Consequences for the population</source>
+        <translation>Conseguenze per la pololazione</translation>
+    </message>
+    <message>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="619"/>
+        <source>Loss of Life</source>
+        <translation>Perdite di vite</translation>
+    </message>
+    <message>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="619"/>
+        <source>Total Polpulation at Risk</source>
+        <translation>Totale popolazione a rishio</translation>
+    </message>
+    <message>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="841"/>
         <source>error table FatalityRate is empty</source>
         <translation>errore la tabella FatalityRate è vuota</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="699"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="847"/>
         <source>error in table FatalityRate</source>
         <translation>errore nella tabella FatalityRate</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="659"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="807"/>
         <source>error table FloodSeverity is empty</source>
         <translation>errore la tabella FloodSeverity è vuota</translation>
     </message>
     <message>
-        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="665"/>
+        <location filename="calcolorischiopopolazione/calcolorischiopopolazionedialog.py" line="813"/>
         <source>error in table FloodSeverity</source>
         <translation>errore nella tabella FloodSeverity</translation>
     </message>
@@ -489,185 +489,190 @@
 <context>
     <name>caricadatiDialog</name>
     <message>
-        <location filename="caricadati/caricadatidialog.py" line="109"/>
+        <location filename="caricadati/caricadatidialog.py" line="222"/>
+        <source>File Error</source>
+        <translation>Errore nel file</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="127"/>
         <source>FloodRisk | Make new Geodatabase Sqlite</source>
         <translation>FloodRisk | Crea un nuovo Geodatabase Sqlite</translation>
     </message>
     <message>
-        <location filename="caricadati/caricadatidialog.py" line="122"/>
+        <location filename="caricadati/caricadatidialog.py" line="140"/>
         <source>Start making</source>
         <translation>Inizio elaborazione</translation>
     </message>
     <message>
-        <location filename="caricadati/caricadatidialog.py" line="127"/>
-        <source>Make Database</source>
-        <translation>Creazione Database</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="141"/>
-        <source>Message</source>
-        <translation>Messaggio</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="132"/>
-        <source>Sqlite file created</source>
-        <translation>Creato file Sqlite</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="153"/>
-        <source>Warning</source>
-        <translation>Attenzione</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="462"/>
-        <source>You must first create the Geodb.Sqlite</source>
-        <translation>Occorre prima creare il Geodatabase Sqlite</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="153"/>
-        <source>Attention no Reference System selected</source>
-        <translation>Attenzione non è stato selezionato il Sistema di Riferimento</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="157"/>
-        <source>Reference System Loaded:  </source>
-        <translation>Sistema di Riferimento Caricato:</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="170"/>
-        <source>Attention: error in the definition of the reference system of the file </source>
-        <translation>Attenzione: errore nella definizione del sistema di riferimento del file </translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="171"/>
-        <source>Setting Reference System</source>
-        <translation>Impostazione Sistema di Riferimento</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="174"/>
-        <source>FloodRisk: select Analysis Area shapefile</source>
-        <translation>FloodRisk: seleziona lo shapefile dell&apos;Area di studio</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="182"/>
-        <source>FloodRisk: select Census shapefile</source>
-        <translation>FloodRisk: seleziona lo shapefile del Censimento</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="190"/>
-        <source>FloodRisk: select Census Table Data</source>
-        <translation>FloodRisk: seleziona la tabella del Censimento</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="198"/>
-        <source>FloodRisk: select Estate Polygon shapefile</source>
-        <translation>FloodRisk: seleziona lo shapefile dei poligoni dei beni areali</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="207"/>
-        <source>FloodRisk: select Infrastructures Line shapefile</source>
-        <translation>FloodRisk: seleziona lo shapefile delle linee dei beni lineari</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="317"/>
-        <source>FloodRisk: select Fatality Rate file</source>
-        <translation>FloodRisk: seleziona il file dei Fatality Rate</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="325"/>
-        <source>FloodRisk: select Flood Severity file</source>
-        <translation>Seleziona il file Flood Severity</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="333"/>
-        <source>FloodRisk: select List of Depth-Damage Curves file</source>
-        <translation>FloodRisk: seleziona il file della lista di tipi di Curve Altezza-Danno</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="341"/>
-        <source>FloodRisk: select Depth-Damage Curves file</source>
-        <translation>FloodRisk: seleziona il file delle Curve Altezza-Danno</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="349"/>
-        <source>FloodRisk: select Occupacy Type file</source>
-        <translation>FloodRisk: seleziona il file dei tipi di Beni</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="451"/>
-        <source>First load the DataBase</source>
-        <translation>Occorre prima definire il DataBase</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="457"/>
-        <source>Files have been uploaded</source>
-        <translation>I file sono stati caricati</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="516"/>
-        <source>Please, upload firstly Analysis Area</source>
-        <translation>Attenzione occorre caricare prima l&apos;Area di Studio</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="140"/>
-        <source>Current Reference System :  EPSG=</source>
-        <translation>Sistema di Riferimento corrente: EPSG=</translation>
-    </message>
-    <message>
-        <location filename="caricadati/caricadatidialog.py" line="124"/>
+        <location filename="caricadati/caricadatidialog.py" line="142"/>
         <source>Attention file</source>
         <translation>Attenzione il file</translation>
     </message>
     <message>
-        <location filename="caricadati/caricadatidialog.py" line="125"/>
+        <location filename="caricadati/caricadatidialog.py" line="143"/>
         <source>already exists: execution stopped</source>
         <translation>esiste già escuzione arrestata</translation>
     </message>
     <message>
-        <location filename="caricadati/caricadatidialog.py" line="134"/>
+        <location filename="caricadati/caricadatidialog.py" line="145"/>
+        <source>Make Database</source>
+        <translation>Creazione Database</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="158"/>
+        <source>Message</source>
+        <translation>Messaggio</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="149"/>
+        <source>Sqlite file created</source>
+        <translation>Creato file Sqlite</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="151"/>
         <source>Sqlite file error</source>
         <translation>Errore nella creazione del geodatabase</translation>
     </message>
     <message>
-        <location filename="caricadati/caricadatidialog.py" line="144"/>
+        <location filename="caricadati/caricadatidialog.py" line="665"/>
+        <source>Current Reference System :  EPSG=</source>
+        <translation>Sistema di Riferimento corrente: EPSG=</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="170"/>
+        <source>Warning</source>
+        <translation>Attenzione</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="161"/>
         <source>You must first choose the Geodb.Sqlite&apos;s name</source>
         <translation>Occorre prima definire il nome del Geodatabase.Sqlite</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="170"/>
+        <source>Attention no Reference System selected</source>
+        <translation>Attenzione non è stato selezionato il Sistema di Riferimento</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="174"/>
+        <source>Reference System Loaded:  </source>
+        <translation>Sistema di Riferimento Caricato:</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="187"/>
+        <source>Attention: error in the definition of the reference system of the file </source>
+        <translation>Attenzione: errore nella definizione del sistema di riferimento del file </translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="188"/>
+        <source>Setting Reference System</source>
+        <translation>Impostazione Sistema di Riferimento</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="191"/>
+        <source>FloodRisk: select Analysis Area shapefile</source>
+        <translation>FloodRisk: seleziona lo shapefile dell&apos;Area di studio</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="199"/>
+        <source>FloodRisk: select Census shapefile</source>
+        <translation>FloodRisk: seleziona lo shapefile del Censimento</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="207"/>
+        <source>FloodRisk: select Census Table Data</source>
+        <translation>FloodRisk: seleziona la tabella del Censimento</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="228"/>
+        <source>FloodRisk: select Estate Polygon shapefile</source>
+        <translation>FloodRisk: seleziona lo shapefile dei poligoni dei beni areali</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="236"/>
+        <source>FloodRisk: select Infrastructures Line shapefile</source>
+        <translation>FloodRisk: seleziona lo shapefile delle linee dei beni lineari</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="346"/>
+        <source>FloodRisk: select Fatality Rate file</source>
+        <translation>FloodRisk: seleziona il file dei Fatality Rate</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="354"/>
+        <source>FloodRisk: select Flood Severity file</source>
+        <translation>Seleziona il file Flood Severity</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="361"/>
+        <source>FloodRisk: select List of Depth-Damage Curves file</source>
+        <translation>FloodRisk: seleziona il file della lista di tipi di Curve Altezza-Danno</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="368"/>
+        <source>FloodRisk: select Depth-Damage Curves file</source>
+        <translation>FloodRisk: seleziona il file delle Curve Altezza-Danno</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="376"/>
+        <source>FloodRisk: select Occupacy Type file</source>
+        <translation>FloodRisk: seleziona il file dei tipi di Beni</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="484"/>
+        <source>Files have been uploaded</source>
+        <translation>I file sono stati caricati</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="489"/>
+        <source>You must first create the Geodb.Sqlite</source>
+        <translation>Occorre prima creare il Geodatabase Sqlite</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="478"/>
+        <source>First load the DataBase</source>
+        <translation>Occorre prima definire il DataBase</translation>
+    </message>
+    <message>
+        <location filename="caricadati/caricadatidialog.py" line="546"/>
+        <source>Please, upload firstly Analysis Area</source>
+        <translation>Attenzione occorre caricare prima l&apos;Area di Studio</translation>
     </message>
 </context>
 <context>
     <name>creaprogettoDialog</name>
     <message>
-        <location filename="creaprogetto/creaprogettodialog.py" line="183"/>
+        <location filename="creaprogetto/creaprogettodialog.py" line="177"/>
         <source>FloodRisk: select the project file</source>
         <translation>FloodRisk: seleziona il file del progetto</translation>
     </message>
     <message>
-        <location filename="creaprogetto/creaprogettodialog.py" line="190"/>
+        <location filename="creaprogetto/creaprogettodialog.py" line="187"/>
         <source>Select the geodatabase</source>
         <translation>Seleziona il geodatabase</translation>
     </message>
     <message>
-        <location filename="creaprogetto/creaprogettodialog.py" line="198"/>
+        <location filename="creaprogetto/creaprogettodialog.py" line="195"/>
         <source>Select maximum water depth grid</source>
         <translation>Seleziona il grid delle massime altezze d&apos;acqua</translation>
     </message>
     <message>
-        <location filename="creaprogetto/creaprogettodialog.py" line="233"/>
+        <location filename="creaprogetto/creaprogettodialog.py" line="230"/>
         <source>Select maximum water velocity grid</source>
         <translation>Selezione il grid delle massime velocità</translation>
     </message>
     <message>
-        <location filename="creaprogetto/creaprogettodialog.py" line="241"/>
+        <location filename="creaprogetto/creaprogettodialog.py" line="238"/>
         <source>Select warning time shape-file</source>
         <translation>Selezione lo shapefile dei tempi di preavviso</translation>
     </message>
     <message>
-        <location filename="creaprogetto/creaprogettodialog.py" line="419"/>
+        <location filename="creaprogetto/creaprogettodialog.py" line="456"/>
         <source>Project Saved</source>
         <translation>Progetto Salvato</translation>
     </message>
     <message>
-        <location filename="creaprogetto/creaprogettodialog.py" line="368"/>
+        <location filename="creaprogetto/creaprogettodialog.py" line="406"/>
         <source>FloodRisk | Input the name of the project file</source>
         <translation>FloodRisk | Input il nome del file del progetto</translation>
     </message>
@@ -718,22 +723,22 @@
         <translation>Tipo di Curve Altezza-Danno : </translation>
     </message>
     <message>
-        <location filename="calcolodanno/graficofloodriskdialog.py" line="295"/>
+        <location filename="calcolodanno/graficofloodriskdialog.py" line="297"/>
         <source>Chart Depth-Damage Curve</source>
         <translation>Grafico delle curve altezza-danno</translation>
     </message>
     <message>
-        <location filename="calcolodanno/graficofloodriskdialog.py" line="296"/>
+        <location filename="calcolodanno/graficofloodriskdialog.py" line="298"/>
         <source>Type Curve : </source>
         <translation>Tipo di curva:</translation>
     </message>
     <message>
-        <location filename="calcolodanno/graficofloodriskdialog.py" line="394"/>
+        <location filename="calcolodanno/graficofloodriskdialog.py" line="396"/>
         <source>Water depth (m)</source>
         <translation>Altezza d&apos;acqua (m)</translation>
     </message>
     <message>
-        <location filename="calcolodanno/graficofloodriskdialog.py" line="395"/>
+        <location filename="calcolodanno/graficofloodriskdialog.py" line="397"/>
         <source>Damage (%)</source>
         <translation>Danno (%)</translation>
     </message>
