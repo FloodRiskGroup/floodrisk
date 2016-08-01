@@ -45,6 +45,18 @@ spatialRef = osr.SpatialReference()
 import sqlite3
 from pyspatialite import dbapi2 as db
 
+# to writing cvs file
+import locale
+
+def set_csv_separator():
+    locale.setlocale(locale.LC_ALL, '') # set to user's locale, not "C"
+    dec_pt_chr = locale.localeconv()['decimal_point']
+    if dec_pt_chr == ",":
+        list_delimiter = ";"
+    else:
+        list_delimiter = ","
+    return list_delimiter
+
 def CampiSHP(layer,feat):
 
     feat_defn = layer.GetLayerDefn()
@@ -219,6 +231,9 @@ def main(Lista,app):
     NotErr=bool('True')
     errMsg='OK'
     NumLoss_notRound=0.0
+
+    # field separator
+    sep=set_csv_separator()
 
     Codici, Descrizione = CaricaCodedDomains(DBfile)
 
@@ -765,7 +780,7 @@ def main(Lista,app):
     # writing heading
     testo=''
     for campo in Campi:
-        testo+=campo+';'
+        testo+=campo+sep
     testo=testo[:-1]+'\n'
     ftab.write(testo)
 
@@ -916,21 +931,21 @@ def main(Lista,app):
     # -----------------
     for irec in range(len(DepthLimits)):
 
-        testo=righe[irec]+';'
-        testo+='%d;' % (ListAree[irec])
+        testo=righe[irec]+sep
+        testo+='%d%s' % (ListAree[irec],sep)
         for i in range(NumTipiPop):
-            testo+='%d;' % (PopRiskSum[irec,i])
-        testo+='%d;' % (TotPopRiskRighe[irec])
-        testo+='%d;' % (ListaLoss[irec])
+            testo+='%d%s' % (PopRiskSum[irec,i],sep)
+        testo+='%d%s' % (TotPopRiskRighe[irec],sep)
+        testo+='%d%s' % (ListaLoss[irec],sep)
         testo=testo[:-1] +'\n'
         ftab.write(testo)
 
-    testo=righe[numRighe-1]+';'
-    testo+='%d;' % (TotAreaSum)
+    testo=righe[numRighe-1]+sep
+    testo+='%d%s' % (TotAreaSum,sep)
     for i in range(NumTipiPop):
-        testo+='%d;' % (TotPopRiskSum[i])
-    testo+='%d;' % (TotPopRiskRighe.sum())
-    testo+='%d;' % (TotLossSum)
+        testo+='%d%s' % (TotPopRiskSum[i],sep)
+    testo+='%d%s' % (TotPopRiskRighe.sum(),sep)
+    testo+='%d%s' % (TotLossSum,sep)
     testo=testo[:-1] +'\n'
     ftab.write(testo)
 

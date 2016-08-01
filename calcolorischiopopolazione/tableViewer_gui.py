@@ -34,6 +34,47 @@ from ui_tableViewer import Ui_Dialog
 #from tableManagerUiInsert import Ui_Insert
 import sys
 import os
+# to reading cvs file
+import csv
+import locale
+
+def checkNumRowsFromCSV(pathToCsvFile,sep):
+    ok=False
+    try :
+        with open(pathToCsvFile, 'rb') as csvfile:
+            reader = csv.reader(csvfile, delimiter=sep, quotechar='"')
+            headers = reader.next()
+            numheaders=len(headers)
+            if numheaders>1:
+                row = reader.next()
+                numrow=len(row)
+                if numheaders==numrow:
+                    ok=True
+    except:
+        pass
+    return ok
+
+def check_csv_separator(pathToCsvFile):
+
+    locale.setlocale(locale.LC_ALL, '') # set to user's locale, not "C"
+    dec_pt_chr = locale.localeconv()['decimal_point']
+    if dec_pt_chr == ",":
+        list_delimiter = ";"
+    else:
+        list_delimiter = ","
+
+    check1=checkNumRowsFromCSV(pathToCsvFile,list_delimiter)
+
+    if not check1:
+        if list_delimiter==',':
+            list_delimiter=';'
+        elif list_delimiter==';':
+            list_delimiter=','
+        check2 = checkNumRowsFromCSV(pathToCsvFile,list_delimiter)
+        if not check2:
+            list_delimiter=' '
+
+    return list_delimiter
 
 ########## CLASS TableManager ##############################
 
@@ -87,37 +128,45 @@ class TableViewer(QDialog, Ui_Dialog):
 
     self.NomeFile=NomeFile
     abil=bool()
+
     if os.path.exists(self.NomeFile):
+
+        # field separator
+        sep=check_csv_separator(self.NomeFile)
+
+        # count the number of records
         filcsv=open(self.NomeFile,'r')
         riga=filcsv.readline()
-        testo=riga[:-1]
-        pp=str.split(testo,';')
-        self.fields=[]
-        for p in pp:
-            self.fields.append(p)
-        self.data = []
-        for i in range(len(self.fields)):
-          self.data += [[]]
         steps=0
+        progress = unicode('Reading data ') # As a progress bar is used the main window's status bar, because the own one is not initialized yet
         for rec in filcsv:
             if len(rec)>0:
                 steps=steps+1
-        #steps = self.provider.featureCount()
         stepp = steps / 10
         if stepp == 0:
           stepp = 1
-        #progress = self.tr('Reading data ') # As a progress bar is used the main window's status bar, because the own one is not initialized yet
-        progress = unicode('Reading data ') # As a progress bar is used the main window's status bar, because the own one is not initialized yet
         filcsv.close()
-        filcsv=open(self.NomeFile,'r')
-        riga=filcsv.readline()
+
+        # Reading csv file
+        finp = open(self.NomeFile)
+        csv_reader = csv.reader(finp, delimiter=sep, quotechar='"')
+        headers = csv_reader.next()
+        self.fields=[]
+        for p in headers:
+            self.fields.append(p)
+
+        self.data = []
+        numfields=len(self.fields)
+        for i in range(numfields):
+          self.data += [[]]
+
         n = 0
         self.numRows=0
         for kk in range(steps):
-            riga=filcsv.readline()[:-1]
-            attrs=str.split(riga,';')
-            for i in range(len(attrs)):
-                self.data[i] += [attrs[i]]
+            record=csv_reader.next()
+            nn=min(numfields,len(record))
+            for i in range(nn):
+                self.data[i] += [record[i]]
 
             n += 1
             self.numRows+=1
@@ -125,14 +174,67 @@ class TableViewer(QDialog, Ui_Dialog):
                 progress +=unicode("|")
                 self.iface.mainWindow().statusBar().showMessage(progress)
         abil=bool("true")
+        finp.close()
 
     else:
-        msg='Attenzione il file %s: non esiste ' % self.NomeFile
+        txt1=self.tr('Warning the file')
+        txt2=self.tr('does not exists')
+        msg='%s\n\n %s\n\n %s' % (txt1,self.NomeFile,txt2)
         QMessageBox.information(None, "Fine input", msg)
 
 
     self.iface.mainWindow().statusBar().showMessage('')
     return abil
+
+
+##    self.NomeFile=NomeFile
+##    abil=bool()
+##    if os.path.exists(self.NomeFile):
+##        filcsv=open(self.NomeFile,'r')
+##        riga=filcsv.readline()
+##        testo=riga[:-1]
+##        pp=str.split(testo,';')
+##        self.fields=[]
+##        for p in pp:
+##            self.fields.append(p)
+##        self.data = []
+##        for i in range(len(self.fields)):
+##          self.data += [[]]
+##        steps=0
+##        for rec in filcsv:
+##            if len(rec)>0:
+##                steps=steps+1
+##        #steps = self.provider.featureCount()
+##        stepp = steps / 10
+##        if stepp == 0:
+##          stepp = 1
+##        #progress = self.tr('Reading data ') # As a progress bar is used the main window's status bar, because the own one is not initialized yet
+##        progress = unicode('Reading data ') # As a progress bar is used the main window's status bar, because the own one is not initialized yet
+##        filcsv.close()
+##        filcsv=open(self.NomeFile,'r')
+##        riga=filcsv.readline()
+##        n = 0
+##        self.numRows=0
+##        for kk in range(steps):
+##            riga=filcsv.readline()[:-1]
+##            attrs=str.split(riga,';')
+##            for i in range(len(attrs)):
+##                self.data[i] += [attrs[i]]
+##
+##            n += 1
+##            self.numRows+=1
+##            if n % stepp == 0:
+##                progress +=unicode("|")
+##                self.iface.mainWindow().statusBar().showMessage(progress)
+##        abil=bool("true")
+##
+##    else:
+##        msg='Attenzione il file %s: non esiste ' % self.NomeFile
+##        QMessageBox.information(None, "Fine input", msg)
+##
+##
+##    self.iface.mainWindow().statusBar().showMessage('')
+##    return abil
 
 
   def drawDataTable(self,tab): # Called when user switches tabWidget to the Table Preview

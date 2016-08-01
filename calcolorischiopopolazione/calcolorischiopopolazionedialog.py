@@ -28,10 +28,17 @@ from xml.dom.minidom import Document
 import AssessConsequencesPopulation
 from ui_calcolorischiopopolazione import Ui_FloodRisk
 from tableViewer_gui import TableViewer
-from pylab import *
+try:
+    from pylab import *
+except:
+    pass
 import sys
 import os
 import sqlite3
+
+# to reading cvs file
+import csv
+import locale
 
 try:
     from osgeo import ogr
@@ -106,6 +113,44 @@ def LayerCaricato(self,NomeLayer):
             ok=bool('True')
             break
     return ok
+
+def checkNumRowsFromCSV(pathToCsvFile,sep):
+    ok=False
+    try :
+        with open(pathToCsvFile, 'rb') as csvfile:
+            reader = csv.reader(csvfile, delimiter=sep, quotechar='"')
+            headers = reader.next()
+            numheaders=len(headers)
+            if numheaders>1:
+                row = reader.next()
+                numrow=len(row)
+                if numheaders==numrow:
+                    ok=True
+    except:
+        pass
+    return ok
+
+def check_csv_separator(pathToCsvFile):
+
+    locale.setlocale(locale.LC_ALL, '') # set to user's locale, not "C"
+    dec_pt_chr = locale.localeconv()['decimal_point']
+    if dec_pt_chr == ",":
+        list_delimiter = ";"
+    else:
+        list_delimiter = ","
+
+    check1=checkNumRowsFromCSV(pathToCsvFile,list_delimiter)
+
+    if not check1:
+        if list_delimiter==',':
+            list_delimiter=';'
+        elif list_delimiter==';':
+            list_delimiter=','
+        check2 = checkNumRowsFromCSV(pathToCsvFile,list_delimiter)
+        if not check2:
+            list_delimiter=' '
+
+    return list_delimiter
 
 class calcolorischiopopolazioneDialog(QtGui.QDialog, Ui_FloodRisk):
     def __init__(self,iface):
@@ -488,61 +533,54 @@ class calcolorischiopopolazioneDialog(QtGui.QDialog, Ui_FloodRisk):
     def istogrammi(self):
         self.NomeFile=str(self.txtShellFilePath_7.text())
         if os.path.exists(self.NomeFile):
-            filcsv=open(self.NomeFile,'r')
-            riga=filcsv.readline()
-            testo=riga[:-1]
-            pp=str.split(testo,';')
-            self.fields=[]
-            yPopTotRischio=[]
-            yPerViteUman=[]
-            xTiranteIdrico=[]
-            for p in pp:
-                self.fields.append(p)
-            self.data = []
-            for i in range(len(self.fields)):
-                self.data += [[]]
-            steps=0
-            for rec in filcsv:
-                if len(rec)>0:
-                    steps=steps+1
-            #steps = self.provider.featureCount()
-            stepp = steps / 10
-            if stepp == 0:
-                stepp = 1
-            progress = unicode('Reading data ') # As a progress bar is used the main window's status bar, because the own one is not initialized yet
-            filcsv.close()
-            filcsv=open(self.NomeFile,'r')
-            riga=filcsv.readline()
-            n = 0
-            self.numRows=0
-            for kk in range(steps):
-                riga=filcsv.readline()[:-1]
-                attrs=str.split(riga,';')
-                for i in range(len(attrs)):
-                    self.data[i] += [attrs[i]]
-                    if i == 0:
-                        xTiranteIdrico += [attrs[i]]
-                    if i == 4:
-                        yPopTotRischio += [int(attrs[i])]
-                    if i == 5:
-                        yPerViteUman += [int(attrs[i])]
+            try:
+                import matplotlib
 
-                n += 1
-                self.numRows+=1
+                self.sep=check_csv_separator(self.NomeFile)
+               # Reading csv file
+                finp = open(self.NomeFile)
+                csv_reader = csv.reader(finp, delimiter=self.sep, quotechar='"')
+                headers = csv_reader.next()
 
-        #---------------Draw Chart-----------------
-        y1=yPerViteUman
-        y2=yPopTotRischio
-        x1=xTiranteIdrico
-        width=0.3  # bar width
-        i=arange(len(y1))
-        r1=bar(i, y1,width, color='r',linewidth=1)
-        r2=bar(i+width,y2,width,color='b',linewidth=1)
-        xticks(i+width/2,x1)
-        xlabel(self.tr('Range water depth (m)')); ylabel(self.tr('Number people')); title(self.tr('Consequences for the population'))
-        legend((r1[0],r2[0]),(self.tr('Loss of Life'), self.tr('Total Polpulation at Risk')),'best')
-        grid()
-        show()
+                self.fields=[]
+                for p in headers:
+                    self.fields.append(p)
+
+                progress = unicode('Reading data ') # As a progress bar is used the main window's status bar, because the own one is not initialized yet
+
+                yPopTotRischio=[]
+                yPerViteUman=[]
+                xTiranteIdrico=[]
+                for record in csv_reader:
+                    for i in range(len(record)):
+
+                        if i == 0:
+                            xTiranteIdrico += [record[i]]
+                        if i == 4:
+                            yPopTotRischio += [int(record[i])]
+                        if i == 5:
+                            yPerViteUman += [int(record[i])]
+
+                finp.close()
+
+                #---------------Draw Chart-----------------
+                y1=yPerViteUman
+                y2=yPopTotRischio
+                x1=xTiranteIdrico
+                width=0.3  # bar width
+                i=arange(len(y1))
+                r1=bar(i, y1,width, color='r',linewidth=1)
+                r2=bar(i+width,y2,width,color='b',linewidth=1)
+                xticks(i+width/2,x1)
+                xlabel(self.tr('Range water depth (m)')); ylabel(self.tr('Number people')); title(self.tr('Consequences for the population'))
+                try:
+                    legend((r1[0],r2[0]),(self.tr('Loss of Life'), self.tr('Total Polpulation at Risk')),'best')
+                except:
+                    pass
+                grid()
+                show()
+            except:
+                QMessageBox.information(None, "Warning", "The current version of QGIS does not allow import matplotlib")
 
     def setUnderstandingDam(self, enabled):
         if enabled:

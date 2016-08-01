@@ -37,6 +37,7 @@ except ImportError:
 import os, math
 import sys
 
+import locale
 
 spatialRef = osr.SpatialReference()
 
@@ -79,6 +80,15 @@ def LoadParametro(testo):
     parametro=parametro.rstrip()
     return parametro
 
+def set_csv_separator():
+    locale.setlocale(locale.LC_ALL, '') # set to user's locale, not "C"
+    dec_pt_chr = locale.localeconv()['decimal_point']
+    if dec_pt_chr == ",":
+        list_delimiter = ";"
+    else:
+        list_delimiter = ","
+    return list_delimiter
+
 
 def main(Lista,app):
 
@@ -89,6 +99,9 @@ def main(Lista,app):
     NomeFileTabella=Lista[4]
     # ID of vulnerability curve to be used
     IDTipiCurveScelto=Lista[5]
+
+    # field separator
+    sep=set_csv_separator()
 
     NotErr=bool('True')
     errMsg='OK'
@@ -222,6 +235,7 @@ def main(Lista,app):
 
             if NumCelTipo[kk]>0:
 
+
                 tipologia=kk+1
                 mask_tipo=numpy.equal(TipiArray,tipologia)
                 numerocelletipo=mask_tipo.sum()
@@ -332,17 +346,22 @@ def main(Lista,app):
             os.mkdir(filepath)
 
         fildanno=open(NomeFileTabella,'w')
-        text='Code;Description;Valstr_Euro;ValCon_Euro;DamageStr_Euro;DamageCon_Euro\n'
+        text='Code%sDescription%sArea_sqm%sValstr_Euro%sValCon_Euro%sDamageStr_Euro%sDamageCon_Euro\n' % (sep,sep,sep,sep,sep,sep)
         fildanno.write(text)
         #print text
         for i in range(numtipibeni):
 
             CodiceTipo=ListaCodici[i]
+            valoreArea=0.0
             valore1=0.0
             valore2=0.0
             itipo=i+1
 
+
             if NumCelTipo[i]>0:
+
+                valoreArea=NumCelTipo[i]*AreaCella
+                valoreArea=round(valoreArea / 100.0) * 100.0
 
                 danno_tipo=numpy.choose(numpy.not_equal(TipiArray,itipo),(GridDannoStr,0))
                 # calculating the value of the damage to structure for each type of structure
@@ -354,10 +373,14 @@ def main(Lista,app):
                 valore2=danno_tipo.sum()*AreaCella
                 valore2=round(valore2 / 100.0) * 100.0
 
-            text='%s;%s;%d;%d;%d;%d\n' %(CodiceTipo,dic[CodiceTipo],valori[i][1],valori[i][2],valore1,valore2)
+            text='%s%s' %(CodiceTipo,sep)
+            text+='"%s"%s' %(dic[CodiceTipo],sep)
+            text+='%d%s' %(valoreArea,sep)
+            text+='%d%s' %(valori[i][1],sep)
+            text+='%d%s' %(valori[i][2],sep)
+            text+='%d%s' %(valore1,sep)
+            text+='%d\n' %(valore2)
             fildanno.write(text)
-            #print text
-
 
         fildanno.close()
 

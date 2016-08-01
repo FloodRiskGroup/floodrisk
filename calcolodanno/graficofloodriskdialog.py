@@ -28,8 +28,11 @@ from PyQt4.QtGui import *
 from qgis.core import *
 import os.path
 import sqlite3
-from pylab import *
-from matplotlib.font_manager import FontProperties
+try:
+    from pylab import *
+    from matplotlib.font_manager import FontProperties
+except:
+    pass
 
 from PyQt4.QtGui import QAction, QIcon, QApplication, QMessageBox
 from qgis.gui import *
@@ -287,123 +290,127 @@ class graficofloodriskDialog(QtGui.QDialog, Ui_graficofloodrisk):
     def querySql(self):
         if self.lineEdit.displayText() == "":
             QMessageBox.information(None, "Info", "Load GeoDataBase")
-        if self.lineEdit.displayText() != "":
-            DBFile=str(self.lineEdit.text())
-            #connecting to sqlite
-            conn = sqlite3.connect(DBFile, detect_types=sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)
-            ListaTipiBeni = []
+        try:
             fontp=FontProperties()
-            fontp.set_size('small')
-            txt=self.tr('Chart Depth-Damage Curve')
-            txt1=self.tr("Type Curve : ") + self.tipo
-            nomiLegenda=[]
-            # Cycle on the damage to the structure curves
-            if len(self.codTipoDanno) > 0:
-                TipoDanno=self.codTipoDanno[0]
-                # Manage multiselection
-                for i in range(0 , self.mdl.rowCount()):
-                    if self.mdl.item(i,0).data(Qt.CheckStateRole):
-                        TipoBene = self.mdl.item(i,3).text()
-                        ListaTipiBeni.append(TipoBene)
-                        nome='%s - damage to  %s' % (TipoBene, TipoDanno)
-                        nomiLegenda.append(nome)
+            if self.lineEdit.displayText() != "":
+                DBFile=str(self.lineEdit.text())
+                #connecting to sqlite
+                conn = sqlite3.connect(DBFile, detect_types=sqlite3.PARSE_DECLTYPES|sqlite3.PARSE_COLNAMES)
+                ListaTipiBeni = []
+                fontp=FontProperties()
+                fontp.set_size('small')
+                txt=self.tr('Chart Depth-Damage Curve')
+                txt1=self.tr("Type Curve : ") + self.tipo
+                nomiLegenda=[]
+                # Cycle on the damage to the structure curves
+                if len(self.codTipoDanno) > 0:
+                    TipoDanno=self.codTipoDanno[0]
+                    # Manage multiselection
+                    for i in range(0 , self.mdl.rowCount()):
+                        if self.mdl.item(i,0).data(Qt.CheckStateRole):
+                            TipoBene = self.mdl.item(i,3).text()
+                            ListaTipiBeni.append(TipoBene)
+                            nome='%s - damage to  %s' % (TipoBene, TipoDanno)
+                            nomiLegenda.append(nome)
 
-                TipoDanno=self.numDanno[TipoDanno]
-                for TipoBene in ListaTipiBeni:
-                    TipoBene=self.deskCod[TipoBene]
+                    TipoDanno=self.numDanno[TipoDanno]
+                    for TipoBene in ListaTipiBeni:
+                        TipoBene=self.deskCod[TipoBene]
 
-                    testoSQL="SELECT HydroValue,Damage FROM Vulnerability where"
-                    testoSQL += " OccuType='%s'" % TipoBene
-                    testoSQL += ' and DmgType=%s' %  TipoDanno
-                    testoSQL += ' and VulnType=1'
-                    testoSQL += ' and VulnID=%d' % self.idTipo
-                    testoSQL += ' ORDER BY HydroValue;'
-                    cursor = conn.cursor()
-                    cursor.execute(testoSQL)
-                    TabVuln=cursor.fetchall()
-                    if TabVuln!= None:
-                        LimAlt=[]
-                        Danno=[]
-                        for rec in TabVuln:
-                            LimAlt.append(rec[0])
-                            Danno.append(rec[1])
-                            numerolim=len(LimAlt)
+                        testoSQL="SELECT HydroValue,Damage FROM Vulnerability where"
+                        testoSQL += " OccuType='%s'" % TipoBene
+                        testoSQL += ' and DmgType=%s' %  TipoDanno
+                        testoSQL += ' and VulnType=1'
+                        testoSQL += ' and VulnID=%d' % self.idTipo
+                        testoSQL += ' ORDER BY HydroValue;'
+                        cursor = conn.cursor()
+                        cursor.execute(testoSQL)
+                        TabVuln=cursor.fetchall()
+                        if TabVuln!= None:
+                            LimAlt=[]
+                            Danno=[]
+                            for rec in TabVuln:
+                                LimAlt.append(rec[0])
+                                Danno.append(rec[1])
+                                numerolim=len(LimAlt)
 
-                #--------------------------------------------------------------------------
-                #--------------Draw the Chart------------------------------------------------
-                #--------------------------------------------------------------------------
-                    y=Danno
-                    x=[]
-                    x_prec=0
-                    for z in LimAlt:
-                        if z != 9999.0:
-                            x_prec=z
-                            x.append(z)
-                        else:
-                            x.append(x_prec * 1.1)
-
-                    plot(x,y)
-                    hold(True)
-
-            # Cycle on the damage to the content curves
-            if len(self.codTipoDanno) > 1:
-                TipoDanno=self.codTipoDanno[1]
-                ListaTipiBeni=[]
-                for i in range(0 , self.mdl.rowCount()):
-                    if self.mdl.item(i,1).data(Qt.CheckStateRole):
-                        TipoBene = self.mdl.item(i,3).text()
-                        ListaTipiBeni.append(TipoBene)
-                        nome='%s - damage to  %s' % (TipoBene, TipoDanno)
-                        nomiLegenda.append(nome)
-
-                TipoDanno=self.numDanno[TipoDanno]
-                for TipoBene in ListaTipiBeni:
-                    TipoBene=self.deskCod[TipoBene]
-
-                    testoSQL="SELECT HydroValue,Damage FROM Vulnerability where"
-                    testoSQL += " OccuType='%s'" % TipoBene
-                    testoSQL += ' and DmgType=%s' %  TipoDanno
-                    testoSQL += ' and VulnType=1'
-                    testoSQL += ' and VulnID=%d' % self.idTipo
-                    testoSQL += ' ORDER BY HydroValue;'
-                    cursor = conn.cursor()
-                    cursor.execute(testoSQL)
-                    TabVuln=cursor.fetchall()
-                    if TabVuln!= None:
-                        LimAlt=[]
-                        Danno=[]
-                        for rec in TabVuln:
-                            LimAlt.append(rec[0])
-                            Danno.append(rec[1])
-                            numerolim=len(LimAlt)
                     #--------------------------------------------------------------------------
                     #--------------Draw the Chart------------------------------------------------
                     #--------------------------------------------------------------------------
-                    y=Danno
-                    x=[]
-                    x_prec=0
-                    for z in LimAlt:
-                        if z != 9999.0:
-                            x_prec=z
-                            x.append(z)
-                        else:
-                            x.append(x_prec * 1.1)
+                        y=Danno
+                        x=[]
+                        x_prec=0
+                        for z in LimAlt:
+                            if z != 9999.0:
+                                x_prec=z
+                                x.append(z)
+                            else:
+                                x.append(x_prec * 1.1)
 
-                    plot(x,y,'--')
-                    hold(True)
+                        plot(x,y)
+                        hold(True)
+
+                # Cycle on the damage to the content curves
+                if len(self.codTipoDanno) > 1:
+                    TipoDanno=self.codTipoDanno[1]
+                    ListaTipiBeni=[]
+                    for i in range(0 , self.mdl.rowCount()):
+                        if self.mdl.item(i,1).data(Qt.CheckStateRole):
+                            TipoBene = self.mdl.item(i,3).text()
+                            ListaTipiBeni.append(TipoBene)
+                            nome='%s - damage to  %s' % (TipoBene, TipoDanno)
+                            nomiLegenda.append(nome)
+
+                    TipoDanno=self.numDanno[TipoDanno]
+                    for TipoBene in ListaTipiBeni:
+                        TipoBene=self.deskCod[TipoBene]
+
+                        testoSQL="SELECT HydroValue,Damage FROM Vulnerability where"
+                        testoSQL += " OccuType='%s'" % TipoBene
+                        testoSQL += ' and DmgType=%s' %  TipoDanno
+                        testoSQL += ' and VulnType=1'
+                        testoSQL += ' and VulnID=%d' % self.idTipo
+                        testoSQL += ' ORDER BY HydroValue;'
+                        cursor = conn.cursor()
+                        cursor.execute(testoSQL)
+                        TabVuln=cursor.fetchall()
+                        if TabVuln!= None:
+                            LimAlt=[]
+                            Danno=[]
+                            for rec in TabVuln:
+                                LimAlt.append(rec[0])
+                                Danno.append(rec[1])
+                                numerolim=len(LimAlt)
+                        #--------------------------------------------------------------------------
+                        #--------------Draw the Chart------------------------------------------------
+                        #--------------------------------------------------------------------------
+                        y=Danno
+                        x=[]
+                        x_prec=0
+                        for z in LimAlt:
+                            if z != 9999.0:
+                                x_prec=z
+                                x.append(z)
+                            else:
+                                x.append(x_prec * 1.1)
+
+                        plot(x,y,'--')
+                        hold(True)
 
 
-            xlabel(self.tr("Water depth (m)"))
-            ylabel(self.tr('Damage (%)'))
-            posizioneLegend='best'
-            legend(nomiLegenda, posizioneLegend, prop=fontp)
-            suptitle(txt,fontsize=14)
-            title(txt1,fontsize=12)
-            limy=ylim()
-            y1=limy[0]
-            y2=limy[1] * 1.1
-            lim=[y1,y2]
-            ylim(lim)
-            grid()
-            show()
+                xlabel(self.tr("Water depth (m)"))
+                ylabel(self.tr('Damage (%)'))
+                posizioneLegend='best'
+                legend(nomiLegenda, posizioneLegend, prop=fontp)
+                suptitle(txt,fontsize=14)
+                title(txt1,fontsize=12)
+                limy=ylim()
+                y1=limy[0]
+                y2=limy[1] * 1.1
+                lim=[y1,y2]
+                ylim(lim)
+                grid()
+                show()
+        except:
+            QMessageBox.information(None, "Warning", "The current version of QGIS does not allow import matplotlib")
 

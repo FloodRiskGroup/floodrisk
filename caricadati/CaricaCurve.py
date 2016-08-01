@@ -23,6 +23,7 @@ import string
 
 # to reading cvs file
 import csv
+from csv_service import CsvFileCheck
 
 def CampiTabella(sql):
 
@@ -46,10 +47,13 @@ def CampiTabella(sql):
 
 def CaricaTabella(cur,NomeFile,NomeTabella,sql_delete):
 
-    finp = open(NomeFile)
+    ListRealType=['REAL','DOUBLE']
 
+    f1=CsvFileCheck(NomeFile)
+    sep=f1.sep
     # Reading csv file
-    csv_reader = csv.reader(finp, delimiter=';')
+    finp = open(NomeFile)
+    csv_reader = csv.reader(finp, delimiter=sep, quotechar='"')
 
     headers = csv_reader.next()
     # delete parts of names after the first space
@@ -115,9 +119,17 @@ def CaricaTabella(cur,NomeFile,NomeTabella,sql_delete):
         for i in range(NumFields):
             col=numcol [CampiInsert[i]]
             if dic_fiels_type[CampiInsert[i]] == 'INTEGER':
-                sql += "%d" % int(row[col])
-            elif dic_fiels_type[CampiInsert[i]] == 'REAL':
-                sql += "%.6f" % float(row[col])
+                if f1.dec_pt_comma:
+                    num=f1.float_comma(row[col])
+                else:
+                    num=float(row[col])
+                sql += "%d" % round(num,0)
+            elif dic_fiels_type[CampiInsert[i]] in ListRealType:
+                if f1.dec_pt_comma:
+                    num=f1.float_comma(row[col])
+                else:
+                    num=float(row[col])
+                sql += "%.6f" % num
             else:
                 stringa=row[col]
                 stringa=stringa.decode('unicode-escape')
@@ -191,9 +203,11 @@ def main(FilesList,UpLoad):
         if  UpLoad[4] >0:
 
             # Reading ID
+            f1=CsvFileCheck(FileTabDepthDamage)
+            sep=f1.sep
+            # Reading csv file
             finp = open(FileTabDepthDamage)
-            # Reading from csv file
-            csv_reader = csv.reader(finp, delimiter=';')
+            csv_reader = csv.reader(finp, delimiter=sep, quotechar='"')
             headers = csv_reader.next()
 
             ListaVulnID=[]
@@ -201,6 +215,7 @@ def main(FilesList,UpLoad):
                 VulnID=int(row[0])
                 if VulnID not in ListaVulnID:
                     ListaVulnID.append(VulnID)
+            finp.close()
 
             # Empty and load Vulnerability table where new type is loading
             # ----------------------------------------------------
@@ -208,6 +223,7 @@ def main(FilesList,UpLoad):
             for VulnID in ListaVulnID:
                 sql_delete='DELETE FROM %s WHERE VulnID=%d' % (tableName,VulnID)
                 cur.execute(sql_delete)
+            conn.commit()
 
             CaricaTabella(cur,FileTabDepthDamage,tableName,sql_delete)
             conn.commit()

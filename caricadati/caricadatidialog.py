@@ -35,6 +35,8 @@ import os
 
 from help import show_context_help
 
+from csv_service import CsvFileCheck
+
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -98,6 +100,22 @@ class caricadatiDialog(QtGui.QDialog, Ui_FloodRisk):
     def show_help(self):
         """Load the help text into the system browser."""
         show_context_help(context='include2')
+
+    def CheckFileTable(self,itab,FileName):
+        try:
+            self.directoryPath=os.path.dirname(FileName)
+            FileName1=FileName
+            f1=CsvFileCheck(FileName)
+            if f1.ok:
+                self.FilesListCsv[itab] = FileName
+                self.UpLoadCsv[itab] = 1
+            else:
+                QMessageBox.information(None, "FloodRisk", self.tr("File Error"))
+                FileName1=""
+        except:
+            QMessageBox.information(None, "FloodRisk", self.tr("File Error"))
+            FileName1=""
+        return FileName1
 
     def setNameFileSQlite(self):
         self.nomeFileSQlite =  str(self.txtShellFilePath.text())
@@ -185,10 +203,21 @@ class caricadatiDialog(QtGui.QDialog, Ui_FloodRisk):
     def setCensimentoXls(self):
         self.nomeFileCensimentoXls = QFileDialog.getOpenFileName(None, self.tr("FloodRisk: select Census Table Data"), self.directoryPath, "FloodRisk File (*.csv)")
         if self.nomeFileCensimentoXls !="":
-            self.txtShellFilePath_6.setText(self.nomeFileCensimentoXls)
-            self.FilesListGeoDati[3] = self.nomeFileCensimentoXls
-            self.UpLoadGeoDati[3] = 1
-            self.directoryPath=os.path.dirname(self.FilesListGeoDati[3])
+            FileName=self.nomeFileCensimentoXls
+            FileName1=FileName
+            self.directoryPath=os.path.dirname(FileName)
+            try:
+                f1=CsvFileCheck(FileName)
+                if f1.ok:
+                    self.FilesListGeoDati[3] = self.nomeFileCensimentoXls
+                    self.UpLoadGeoDati[3] = 1
+                else:
+                    QMessageBox.information(None, "FloodRisk", self.tr("File Error"))
+                    FileName1=""
+            except:
+                QMessageBox.information(None, "FloodRisk", self.tr("File Error"))
+                FileName1=""
+            self.txtShellFilePath_6.setText(FileName1)
 
     def setBeniAreali(self):
         self.nomeFileBA = QFileDialog.getOpenFileName(None, self.tr("FloodRisk: select Estate Polygon shapefile"), self.directoryPath, "FloodRisk File (*.shp)")
@@ -311,42 +340,39 @@ class caricadatiDialog(QtGui.QDialog, Ui_FloodRisk):
     def setFatalityR(self):
         self.nomeFileFatalityR = QFileDialog.getOpenFileName(None, self.tr("FloodRisk: select Fatality Rate file"), self.directoryPath, "FloodRisk File (*.csv)")
         if self.nomeFileFatalityR !="":
-            self.txtShellFilePath_12.setText(self.nomeFileFatalityR)
-            self.FilesListCsv[1] = self.nomeFileFatalityR
-            self.UpLoadCsv[1] = 1
-            self.directoryPath=os.path.dirname(self.FilesListCsv[1])
+            itab=1
+            FileName1=self.CheckFileTable(itab,self.nomeFileFatalityR)
+            self.txtShellFilePath_12.setText(FileName1)
+
 
     def setFloodS(self):
         self.nomeFileFloodS= QFileDialog.getOpenFileName(None, self.tr("FloodRisk: select Flood Severity file"), self.directoryPath, "FloodRisk File (*.csv)")
         if self.nomeFileFloodS !="":
-            self.txtShellFilePath_13.setText(self.nomeFileFloodS)
-            self.FilesListCsv[2] = self.nomeFileFloodS
-            self.UpLoadCsv[2] = 1
-            self.directoryPath=os.path.dirname(self.FilesListCsv[2])
+            itab=2
+            FileName1=self.CheckFileTable(itab,self.nomeFileFloodS)
+            self.txtShellFilePath_13.setText(FileName1)
 
     def setTipoV(self):
         self.nomeFileTipoV= QFileDialog.getOpenFileName(None, self.tr("FloodRisk: select List of Depth-Damage Curves file"), self.directoryPath, "FloodRisk File (*.csv)")
         if self.nomeFileTipoV !="":
-            self.txtShellFilePath_16.setText(self.nomeFileTipoV)
-            self.FilesListCsv[3] = self.nomeFileTipoV
-            self.UpLoadCsv[3] = 1
-            self.directoryPath=os.path.dirname(self.FilesListCsv[3])
+            itab=3
+            FileName1=self.CheckFileTable(itab,self.nomeFileTipoV)
+            self.txtShellFilePath_16.setText(FileName1)
 
     def setVulnerabilita(self):
         self.nomeFileVulnerabilita= QFileDialog.getOpenFileName(None, self.tr("FloodRisk: select Depth-Damage Curves file"), self.directoryPath, "FloodRisk File (*.csv)")
         if self.nomeFileVulnerabilita !="":
-            self.txtShellFilePath_14.setText(self.nomeFileVulnerabilita)
-            self.FilesListCsv[4] = self.nomeFileVulnerabilita
-            self.UpLoadCsv[4] = 1
-            self.directoryPath=os.path.dirname(self.FilesListCsv[4])
+            itab=4
+            FileName1=self.CheckFileTable(itab,self.nomeFileVulnerabilita)
+            self.txtShellFilePath_14.setText(FileName1)
+
 
     def setTipoCategoriaBeni(self):
         self.nomeFileCatBeni= QFileDialog.getOpenFileName(None, self.tr("FloodRisk: select Occupacy Type file"), self.directoryPath, "FloodRisk File (*.csv)")
         if self.nomeFileCatBeni !="":
-            self.txtShellFilePath_17.setText(self.nomeFileCatBeni)
-            self.FilesListCsv[5] = self.nomeFileCatBeni
-            self.UpLoadCsv[5] = 1
-            self.directoryPath=os.path.dirname(self.FilesListCsv[5])
+            itab=5
+            FileName1=self.CheckFileTable(itab,self.nomeFileCatBeni)
+            self.txtShellFilePath_17.setText(FileName1)
 
     def setCheckFatalityR(self, state):
         if state == QtCore.Qt.Checked:

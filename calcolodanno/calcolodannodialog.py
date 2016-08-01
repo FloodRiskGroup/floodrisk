@@ -28,10 +28,16 @@ import os.path
 from xml.dom import minidom
 from xml.dom.minidom import Document
 from tableViewer_gui import TableViewer
-from pylab import *
+try:
+    from pylab import *
+except:
+    pass
 import sys
 import os
 import sqlite3
+# to reading cvs file
+import csv
+import locale
 
 try:
     from osgeo import ogr
@@ -107,6 +113,44 @@ def LayerCaricato(self,NomeLayer):
             break
     return ok
 
+def checkNumRowsFromCSV(pathToCsvFile,sep):
+    ok=False
+    try :
+        with open(pathToCsvFile, 'rb') as csvfile:
+            reader = csv.reader(csvfile, delimiter=sep, quotechar='"')
+            headers = reader.next()
+            numheaders=len(headers)
+            if numheaders>1:
+                row = reader.next()
+                numrow=len(row)
+                if numheaders==numrow:
+                    ok=True
+    except:
+        pass
+    return ok
+
+def check_csv_separator(pathToCsvFile):
+
+    locale.setlocale(locale.LC_ALL, '') # set to user's locale, not "C"
+    dec_pt_chr = locale.localeconv()['decimal_point']
+    if dec_pt_chr == ",":
+        list_delimiter = ";"
+    else:
+        list_delimiter = ","
+
+    check1=checkNumRowsFromCSV(pathToCsvFile,list_delimiter)
+
+    if not check1:
+        if list_delimiter==',':
+            list_delimiter=';'
+        elif list_delimiter==';':
+            list_delimiter=','
+        check2 = checkNumRowsFromCSV(pathToCsvFile,list_delimiter)
+        if not check2:
+            list_delimiter=' '
+
+    return list_delimiter
+
 class calcolodannoDialog(QtGui.QDialog, Ui_FloodRisk):
     def __init__(self,iface):
         QtGui.QDialog.__init__(self)
@@ -137,6 +181,7 @@ class calcolodannoDialog(QtGui.QDialog, Ui_FloodRisk):
         self.dic_TypeId={}
         self.CurveType=''
         self.TotalDamage=0.0
+        #self.sep=set_csv_separator()
 
         # help
         QObject.connect(self.buttonBox, SIGNAL(_fromUtf8("helpRequested()")), self.show_help)
@@ -480,60 +525,55 @@ class calcolodannoDialog(QtGui.QDialog, Ui_FloodRisk):
     def istogrammi(self):
         self.NomeFile=str(self.txtShellFilePath_6.text())
         if os.path.exists(self.NomeFile):
-            filcsv=open(self.NomeFile,'r')
-            riga=filcsv.readline()
-            testo=riga[:-1]
-            pp=str.split(testo,';')
-            self.fields=[]
-            yEuro1=[]
-            yEuro2=[]
-            xCodice=[]
-            for p in pp:
-                self.fields.append(p)
-            self.data = []
-            for i in range(len(self.fields)):
-              self.data += [[]]
-            steps=0
-            for rec in filcsv:
-                if len(rec)>0:
-                    steps=steps+1
-            #steps = self.provider.featureCount()
-            stepp = steps / 10
-            if stepp == 0:
-              stepp = 1
-            progress = unicode('Reading data ') # As a progress bar is used the main window's status bar, because the own one is not initialized yet
-            filcsv.close()
-            filcsv=open(self.NomeFile,'r')
-            riga=filcsv.readline()
-            n = 0
-            self.numRows=0
-            for kk in range(steps):
-                riga=filcsv.readline()[:-1]
-                attrs=str.split(riga,';')
-                for i in range(len(attrs)):
-                    self.data[i] += [attrs[i]]
-                    if i == 0:
-                        xCodice += [attrs[i]]
-                    if i == 4:
-                        yEuro2 += [int(attrs[i])]
-                    if i == 5:
-                        yEuro1 += [int(attrs[i])]
+            try:
 
-                n += 1
-                self.numRows+=1
-            #---------------Draw Chart-----------------
-            y1=yEuro1
-            y2=yEuro2
-            x1=xCodice
-            width=0.3
-            i=arange(len(y1))
-            r1=bar(i, y1,width, color='r',linewidth=1)
-            r2=bar(i+width,y2,width,color='b',linewidth=1)
-            xticks(i+width/2,x1)
-            xlabel('Code'); ylabel('Euro'); title(self.tr('Damage assessment results'))
-            legend((r1[0],r2[0]),(self.tr('Content Damage'), self.tr('Structure Damage')), 'best')
-            grid()
-            show()
+                import matplotlib
+
+                self.sep=check_csv_separator(self.NomeFile)
+                # Reading csv file
+                finp = open(self.NomeFile)
+                csv_reader = csv.reader(finp, delimiter=self.sep, quotechar='"')
+                headers = csv_reader.next()
+
+                self.fields=[]
+                for p in headers:
+                    self.fields.append(p)
+
+                progress = unicode('Reading data ') # As a progress bar is used the main window's status bar, because the own one is not initialized yet
+
+                yEuro1=[]
+                yEuro2=[]
+                xCodice=[]
+                for record in csv_reader:
+                    for i in range(len(record)):
+                        if i == 0:
+                            xCodice += [record[i]]
+                        if i == 5:
+                            yEuro2 += [float(record[i])]
+                        if i == 6:
+                            yEuro1 += [float(record[i])]
+
+                finp.close()
+
+                #---------------Draw Chart-----------------
+                y1=yEuro1
+                y2=yEuro2
+                x1=xCodice
+                width=0.3
+                i=arange(len(y1))
+                r1=bar(i, y1,width, color='r',linewidth=1)
+                r2=bar(i+width,y2,width,color='b',linewidth=1)
+                xticks(i+width/2,x1)
+                xlabel('Code'); ylabel('Euro'); title(self.tr('Damage assessment results'))
+                try:
+                    legend((r1[0],r2[0]),(self.tr('Content Damage'), self.tr('Structure Damage')), 'best')
+                except:
+                    pass
+                grid()
+                show()
+            except:
+                QMessageBox.information(None, "Warning", "The current version of QGIS does not allow import matplotlib")
+
         else:
             txt1=self.tr('Warning the file')
             txt2=self.tr('does not exists')
