@@ -13,7 +13,7 @@ name=Floodrisk
 qgisMinimumVersion=2.0
 description=Floodrisk is an Open Source software to combine the main features of state-of-the-art science, collaboration, transparency and interoperability in an initiative to assist authorities for flood risk analysis and management
 about=Developed by RSE & University of Basilicata
-version=0.1
+version=0.2
 author=RiskGroup
 email=FloodRiskGroup@rse-web.it
 

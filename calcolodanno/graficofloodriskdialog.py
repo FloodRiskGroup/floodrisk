@@ -241,7 +241,10 @@ class graficofloodriskDialog(QtGui.QDialog, Ui_graficofloodrisk):
             if Lista != None:
                 ListaBeni=[]
                 for rec in Lista:
-                    ListaBeni.append(self.codDesk[rec[0]])
+                    try:
+                        ListaBeni.append(self.codDesk[rec[0]])
+                    except:
+                        pass
                 for bene in ListaBeni:
                     row = self.mdl.rowCount()
                     self.mdl.insertRow(row)

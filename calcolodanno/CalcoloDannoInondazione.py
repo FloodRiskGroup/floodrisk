@@ -352,36 +352,40 @@ def main(Lista,app):
         for i in range(numtipibeni):
 
             CodiceTipo=ListaCodici[i]
-            valoreArea=0.0
-            valore1=0.0
-            valore2=0.0
-            itipo=i+1
+
+            if CodiceTipo in dic:
+
+                valoreArea=0.0
+                valore1=0.0
+                valore2=0.0
+                itipo=i+1
 
 
-            if NumCelTipo[i]>0:
+                if NumCelTipo[i]>0:
 
-                valoreArea=NumCelTipo[i]*AreaCella
-                valoreArea=round(valoreArea / 100.0) * 100.0
+                    valoreArea=NumCelTipo[i]*AreaCella
+                    valoreArea=round(valoreArea / 100.0) * 100.0
 
-                danno_tipo=numpy.choose(numpy.not_equal(TipiArray,itipo),(GridDannoStr,0))
-                # calculating the value of the damage to structure for each type of structure
-                valore1=danno_tipo.sum()*AreaCella
-                valore1=round(valore1 / 100.0) * 100.0
+                    danno_tipo=numpy.choose(numpy.not_equal(TipiArray,itipo),(GridDannoStr,0))
+                    # calculating the value of the damage to structure for each type of structure
+                    valore1=danno_tipo.sum()*AreaCella
+                    valore1=round(valore1 / 100.0) * 100.0
 
-                danno_tipo=numpy.choose(numpy.not_equal(TipiArray,itipo),(GridDannoCon,0))
-                # calculating the value of damage to the contents for each type of structure
-                valore2=danno_tipo.sum()*AreaCella
-                valore2=round(valore2 / 100.0) * 100.0
-
-            text='%s%s' %(CodiceTipo,sep)
-            text+='"%s"%s' %(dic[CodiceTipo],sep)
-            text+='%d%s' %(valoreArea,sep)
-            text+='%d%s' %(valori[i][1],sep)
-            text+='%d%s' %(valori[i][2],sep)
-            text+='%d%s' %(valore1,sep)
-            text+='%d\n' %(valore2)
-            fildanno.write(text)
-
+                    danno_tipo=numpy.choose(numpy.not_equal(TipiArray,itipo),(GridDannoCon,0))
+                    # calculating the value of damage to the contents for each type of structure
+                    valore2=danno_tipo.sum()*AreaCella
+                    valore2=round(valore2 / 100.0) * 100.0
+                try:
+                    text='%s%s' %(CodiceTipo,sep)
+                    text+='"%s"%s' %(dic[CodiceTipo],sep)
+                    text+='%d%s' %(valoreArea,sep)
+                    text+='%d%s' %(valori[i][1],sep)
+                    text+='%d%s' %(valori[i][2],sep)
+                    text+='%d%s' %(valore1,sep)
+                    text+='%d\n' %(valore2)
+                    fildanno.write(text)
+                except:
+                    pass
         fildanno.close()
 
         # update ProgressBar
