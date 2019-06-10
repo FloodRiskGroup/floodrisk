@@ -19,12 +19,12 @@
 #!/usr/bin/env python
 import sys
 import os
-
+from CreaGeodatabase import checkGeodatabaseToTemplate
 try:
     from osgeo import gdal
     from osgeo.gdalconst import *
     gdal.TermProgress = gdal.TermProgress_nocb
-except ImportError:
+except:
     import gdal
     from gdalconst import *
 
@@ -40,6 +40,7 @@ except:
 import sqlite3
 from pyspatialite import dbapi2 as db
 
+import FindEPSG_lib
 
 # module for reading csv files
 import csv
@@ -168,7 +169,9 @@ def UploadLayerInSQL(layer,TargetEPSG,GeomAreawkt,NomeTabella,NameField,TypeFiel
     NumEPSG= spatialRef.GetAuthorityCode(None)
     if NumEPSG==None:
         prj_txt=spatialRef.ExportToPrettyWkt()
-        NumEPSG=NumEPSGFromOpenGeo(prj_txt)
+        NumEPSG,NameEPSG=FindEPSG_lib.FindEPSG(prj_txt)
+        if NumEPSG==None:
+            NumEPSG=NumEPSGFromOpenGeo(prj_txt)
     else:
         try:
             NumEPSG=int(NumEPSG)
@@ -198,6 +201,8 @@ def UploadLayerInSQL(layer,TargetEPSG,GeomAreawkt,NomeTabella,NameField,TypeFiel
             GeomStudy=ogr.CreateGeometryFromWkt(GeomAreawkt)
         else:
             intersezione=bool()
+        # debug
+        intersezione=bool()
 
         # Reading data into memory
         #===========================================
@@ -319,6 +324,13 @@ def main(self,FilesList,UpLoad, bar):
     NotErr=bool('True')
     errMsg='OK'
 
+    # ckeck geodatabase
+    ok, errMsg = checkGeodatabaseToTemplate(mydb_path)
+
+    if not ok:
+        return ok, errMsg
+
+
     # creating/connecting the test_db
     conn = db.connect(mydb_path)
     # creating a Cursor
@@ -374,7 +386,9 @@ def main(self,FilesList,UpLoad, bar):
         NumEPSG= spatialRef.GetAuthorityCode(None)
         if NumEPSG==None:
             prj_txt=spatialRef.ExportToPrettyWkt()
-            NumEPSG=NumEPSGFromOpenGeo(prj_txt)
+            NumEPSG,NameEPSG=FindEPSG_lib.FindEPSG(prj_txt)
+            if NumEPSG==None:
+                NumEPSG=NumEPSGFromOpenGeo(prj_txt)
         else:
             try:
                 NumEPSG=int(NumEPSG)
@@ -537,7 +551,9 @@ def main(self,FilesList,UpLoad, bar):
         NumEPSG= spatialRef.GetAuthorityCode(None)
         if NumEPSG==None:
             prj_txt=spatialRef.ExportToPrettyWkt()
-            NumEPSG=NumEPSGFromOpenGeo(prj_txt)
+            NumEPSG,NameEPSG=FindEPSG_lib.FindEPSG(prj_txt)
+            if NumEPSG==None:
+                NumEPSG=NumEPSGFromOpenGeo(prj_txt)
         else:
             try:
                 NumEPSG= int(NumEPSG)
@@ -825,7 +841,9 @@ def main(self,FilesList,UpLoad, bar):
         NumEPSG= spatialRef.GetAuthorityCode(None)
         if NumEPSG==None:
             prj_txt=spatialRef.ExportToPrettyWkt()
-            NumEPSG=NumEPSGFromOpenGeo(prj_txt)
+            NumEPSG,NameEPSG=FindEPSG_lib.FindEPSG(prj_txt)
+            if NumEPSG==None:
+                NumEPSG=NumEPSGFromOpenGeo(prj_txt)
         else:
             try:
                 NumEPSG=int(NumEPSG)
@@ -1032,7 +1050,9 @@ def main(self,FilesList,UpLoad, bar):
 
         if NumEPSG==None:
             prj_txt=spatialRef.ExportToPrettyWkt()
-            NumEPSG=NumEPSGFromOpenGeo(prj_txt)
+            NumEPSG,NameEPSG=FindEPSG_lib.FindEPSG(prj_txt)
+            if NumEPSG==None:
+                NumEPSG=NumEPSGFromOpenGeo(prj_txt)
         else:
             try:
                 NumEPSG=int(NumEPSG)

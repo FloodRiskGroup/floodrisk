@@ -132,6 +132,7 @@ class creaprogettoDialog(QtGui.QDialog, Ui_FloodRisk):
         self.comboBox.addItems(ListaFilesRecenti)
 
         self.directoryPath=""
+        self.NomeFileTemplate = self.plugin_dir + os.sep+'..' + os.sep +"caricadati" + os.sep + 'Template.sqlite'
 
         self.AutoLoad=''
         if len(ListaFilesRecenti)>0:
@@ -149,7 +150,8 @@ class creaprogettoDialog(QtGui.QDialog, Ui_FloodRisk):
 
         # initialize actions
         QObject.connect(self.btnChooseShellFile_1, SIGNAL("clicked()"), self.setToolsFile)
-        QObject.connect(self.btnChooseShellFile_2, SIGNAL("clicked()"), self.setFileGDB)
+        #QObject.connect(self.btnChooseShellFile_2, SIGNAL("clicked()"), self.setFileGDB)
+        QObject.connect(self.btnChooseShellFile_2, SIGNAL("clicked()"), self.contextMenuEvent)
         QObject.connect(self.btnChooseShellFile_3, SIGNAL("clicked()"), self.setFileMaxH)
         QObject.connect(self.btnChooseShellFile_velocita, SIGNAL("clicked()"), self.setFileMaxV)
         QObject.connect(self.btnChooseShellFile_tempi, SIGNAL("clicked()"), self.setFileTime)
@@ -179,6 +181,43 @@ class creaprogettoDialog(QtGui.QDialog, Ui_FloodRisk):
             self.comboBox_3.clear()
             self.comboBox_4.clear()
             self.startxml()
+
+    def contextMenuEvent(self):
+        current = QCursor.pos()
+        menu = QMenu(self)
+        menu.addAction(self.tr("Open file"), self.setFileGDB)
+        menu.addSeparator()
+        menu.addAction(self.tr("New file"), self.setNewFileGDB)
+
+        if not menu.isEmpty():
+            menu.exec_(current)
+
+        menu.deleteLater()
+
+
+    def setNewFileGDB(self):
+
+        FileGDBPath = QFileDialog.getSaveFileName(None, self.tr("Floodrisk: select new sqlite file"), self.directoryPath, "Floodrisk.sqlite File (*.sqlite)",QFileDialog.DontConfirmOverwrite);
+
+        if FileGDBPath!="":
+            self.txtShellFilePath_2.setText(FileGDBPath)
+            self.directoryPath=os.path.dirname(FileGDBPath)
+
+            if os.path.exists(FileGDBPath):
+                msgBox = QMessageBox()
+                msgBox.setIcon(QMessageBox.Information)
+                msgBox.setWindowTitle('Floodrisk')
+                msgBox.setText(self.tr("File already exists"))
+                msgBox.setInformativeText(self.tr("Do you want to overwrite it?"));
+                msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+                msgBox.setDefaultButton(QMessageBox.Ok)
+                ret = msgBox.exec_()
+
+                if ret == QMessageBox.Ok:
+                    os.remove(FileGDBPath)
+                    shutil.copy(self.NomeFileTemplate, FileGDBPath)
+            else:
+                shutil.copy(self.NomeFileTemplate, FileGDBPath)
 
     def setFileGDB(self):
         FileGDBPath = QFileDialog.getOpenFileName(self, self.tr("Select the geodatabase"), \

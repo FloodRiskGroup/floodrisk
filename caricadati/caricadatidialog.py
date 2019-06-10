@@ -450,7 +450,8 @@ class caricadatiDialog(QtGui.QDialog, Ui_FloodRisk):
 
     def caricaGeoDati(self):
 
-        if self.CheckGeodatabase():
+        NotErr, errMsg = self.CheckGeodatabase()
+        if NotErr:
             if not self.checkAnalysisArea():
                 self.msgAnalysisArea()
             else:
@@ -465,7 +466,8 @@ class caricadatiDialog(QtGui.QDialog, Ui_FloodRisk):
                 res=self.checkAnalysisAreaReferenceSystem()
 
         else:
-            QMessageBox.information(None, "FloodRisk", self.tr("You must first create the Geodb.Sqlite"))
+            msg="%s \n%s" %(errMsg,self.tr("You must first create the Geodb.Sqlite"))
+            QMessageBox.information(None, "FloodRisk", msg)
 
     def caricaCurve(self):
         FileSql= str(self.txtShellFilePath.text())
@@ -584,6 +586,7 @@ class caricadatiDialog(QtGui.QDialog, Ui_FloodRisk):
     def CheckGeodatabase(self):
 
         res=bool()
+        errMsg='Ok'
 
         if os.path.exists(self.FilesListGeoDati[0]):
             mydb_path=self.FilesListGeoDati[0]
@@ -602,16 +605,21 @@ class caricadatiDialog(QtGui.QDialog, Ui_FloodRisk):
                 TablesList.append('StructurePoly')
 
                 for NomeTabella in TablesList:
-                    sql="SELECT sql FROM sqlite_master WHERE type='table' AND name='%s';" % (NomeTabella)
-                    cur.execute(sql)
-                    Tabella=str(cur.fetchone()[0])
+                    try:
+                        errMsg='Err no table %s in the geodatabase %s' % (NomeTabella,mydb_path)
+                        sql="SELECT sql FROM sqlite_master WHERE type='table' AND name='%s';" % (NomeTabella)
+                        cur.execute(sql)
+                        Tabella=str(cur.fetchone()[0])
+                    except:
+                        res=bool()
+                        return res, errMsg
 
                 res=bool('True')
             except:
                 res=bool()
         else:
             res=bool()
-        return res
+        return res, errMsg
 
 
     def CheckReferenceSystem(self):
