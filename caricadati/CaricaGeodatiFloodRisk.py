@@ -19,12 +19,12 @@
 #!/usr/bin/env python
 import sys
 import os
-from CreaGeodatabase import checkGeodatabaseToTemplate
+
 try:
     from osgeo import gdal
     from osgeo.gdalconst import *
     gdal.TermProgress = gdal.TermProgress_nocb
-except:
+except ImportError:
     import gdal
     from gdalconst import *
 
@@ -201,8 +201,6 @@ def UploadLayerInSQL(layer,TargetEPSG,GeomAreawkt,NomeTabella,NameField,TypeFiel
             GeomStudy=ogr.CreateGeometryFromWkt(GeomAreawkt)
         else:
             intersezione=bool()
-        # debug
-        intersezione=bool()
 
         # Reading data into memory
         #===========================================
@@ -323,13 +321,6 @@ def main(self,FilesList,UpLoad, bar):
 
     NotErr=bool('True')
     errMsg='OK'
-
-    # ckeck geodatabase
-    ok, errMsg = checkGeodatabaseToTemplate(mydb_path)
-
-    if not ok:
-        return ok, errMsg
-
 
     # creating/connecting the test_db
     conn = db.connect(mydb_path)
