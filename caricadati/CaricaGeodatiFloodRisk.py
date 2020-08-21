@@ -909,6 +909,13 @@ def main(self, FilesList, UpLoad, bar):
                             NameOccuTypeShp = NameFieldShp[j]
                         break
 
+            if NameOccuTypeShp=='':
+                # exit with an error code
+                txt1 = self.tr('Error: no OccuType field in file')
+                errMsg = '%s : %s' % (txt1, ShpBeniAreali)
+                NotErr = bool()
+                return NotErr, errMsg
+
             # need if looping again
             Inlayer.ResetReading()
 

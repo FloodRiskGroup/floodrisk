@@ -256,11 +256,12 @@ class creaprogettoDialog(QtGui.QDialog, Ui_FloodRisk):
 
     def selectComboTempiAvviso(self):
         if self.comboBox_4.isEnabled() == True:
-            import imp
-            import fTools
-            path = os.path.dirname(fTools.__file__)
-            ftu = imp.load_source('ftools_utils', os.path.join(path,'tools','ftools_utils.py'))
-            FileTimePath = ftu.getMapLayerByName(self.comboBox_4.currentText())
+##            import imp
+##            import fTools
+##            path = os.path.dirname(fTools.__file__)
+##            ftu = imp.load_source('ftools_utils', os.path.join(path,'tools','ftools_utils.py'))
+##            FileTimePath = ftu.getMapLayerByName(self.comboBox_4.currentText())
+            FileTimePath = self.comboBox_4.currentText()
 
     def setFileMaxV(self):
         FileMaxVPath = QFileDialog.getOpenFileName(self, self.tr("Select maximum water velocity grid"), \
@@ -412,7 +413,10 @@ class creaprogettoDialog(QtGui.QDialog, Ui_FloodRisk):
             self.comboBox.clear()
             self.comboBox.addItems(ListaFilesRecenti)
 
-
+    def caricaComboBox(self, FeatureType):
+        listFiles = []
+        listFiles = self.getLayerSourceByMe(FeatureType)
+        return listFiles
 
     def CaricaLayers(self):
         filePath=str(self.txtShellFilePath_2.text())

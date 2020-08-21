@@ -688,7 +688,7 @@ def main(Lista,app):
     LimAlt=DvFlooSev
     numerolim=len(LimAlt)
     numcel=numpy.zeros(numerolim,numpy.int32)
-    mask_alt=numpy.zeros((numerolim,rows,cols),numpy.bool)
+    mask_alt=numpy.zeros((numerolim,rows,cols),numpy.int)
     # in nodata points of Flow Rate insert the upper limit
     # to avoid being counted as less than the minimum
     MaxLim=LimAlt[numerolim-1]+1
@@ -702,7 +702,8 @@ def main(Lista,app):
     numcel[0]=numpy.sum(mask_alt[0])
     for i in range (1,numerolim):
         # each mask indicates the cells that have a value lower than the limit
-        mask_alt[i]=numpy.less(mask_tmp, LimAlt[i])
+        tmp=numpy.less(mask_tmp, LimAlt[i])
+        mask_alt[i]=tmp.astype(numpy.int)
         mask_alt[i]=mask_alt[i]*1
         nn=numpy.sum(mask_alt[i])
         for j in range (i):

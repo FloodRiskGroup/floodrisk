@@ -270,19 +270,21 @@ def main(Lista,app):
 
                         if numerolim>0:
                             numcel=numpy.zeros(numerolim,numpy.int32)
-                            mask_alt=numpy.zeros((numerolim,rows,cols),numpy.bool)
+                            mask_alt=numpy.zeros((numerolim,rows,cols),numpy.int)
                             # at the points nodata of water depth insert the upper limit value
                             # to avoid being counted as less than the minimum
                             mask_tmp=numpy.choose(numpy.equal(tiranti,inNoData),(tiranti,LimAlt[numerolim-1]) )
                             # the mask index 0, is the one that means values of depth of water below the minimum
-                            mask_alt[0]=numpy.less(mask_tmp, LimAlt[0])
+                            tmp=numpy.less(mask_tmp, LimAlt[0])
+                            mask_alt[0]=tmp.astype(numpy.int)
                             # calculating the percentage of damage
                             GridVuln= numpy.choose(numpy.equal(mask_alt[0],1),(GridVuln,Danno[0]))
                             # account the number of pixels
                             numcel[0]=numpy.sum(mask_alt[0])
                             for i in range (1,numerolim):
                                 # each mask indicates the cells with a value lower than the limit
-                                mask_alt[i]=numpy.less(mask_tmp, LimAlt[i])
+                                tmp=numpy.less(mask_tmp, LimAlt[i])
+                                mask_alt[i]=tmp.astype(numpy.int)
                                 for j in range (i):
                                     mask_alt[i]=mask_alt[i]-mask_alt[j]
                                 numcel[i]=numpy.sum(mask_alt[i])
@@ -291,7 +293,7 @@ def main(Lista,app):
                                 somma=GridVuln.sum()
 
                             numverifica=numpy.sum(numcel)
-                            if numverifica<>numceltot:
+                            if numverifica!=numceltot:
                                 errMsg= 'Attention problem in value of water depth'
                                 #exit with an error code
                                 NotErr=bool()
