@@ -135,7 +135,7 @@ def main(Lista,app):
         if indataset is None:
             errMsg = 'Could not open ' + FileDEM1
             NotErr= bool()
-            return NotErr, errMsg
+            return NotErr, errMsg,TotalDamage
 
         prj = indataset.GetProjectionRef()
 
@@ -297,7 +297,7 @@ def main(Lista,app):
                                 errMsg= 'Attention problem in value of water depth'
                                 #exit with an error code
                                 NotErr=bool()
-                                return NotErr, errMsg
+                                return NotErr, errMsg, TotalDamage
 
                             # calculating the percentage of damage
                             if tipdanno==0:

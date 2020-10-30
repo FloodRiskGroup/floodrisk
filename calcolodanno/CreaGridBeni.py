@@ -65,17 +65,20 @@ def FeatureType(wkt):
         try:
             geom_type=dic[pp[0]]
         except:
-            print 'unknown geometry'
-            print wkt
+            print ('unknown geometry')
+            print (wkt)
             geom_type=0
     else:
-            print 'geometry field empty'
+            print ('geometry field empty')
             geom_type=0
 
     return geom_type
 
 
 def CaricaInMemLaySqlite(NomeTabella,curs,ListaCodici,NomeCampoTipo,ListaCampi,dst_ds,app,ini,fin):
+
+
+    layer_mem=None
 
     sql=" SELECT "
     # loads the field with the type of good
@@ -86,7 +89,7 @@ def CaricaInMemLaySqlite(NomeTabella,curs,ListaCodici,NomeCampoTipo,ListaCampi,d
         for field in ListaCampi:
             sql += ' %s,' %(field)
     else:
-        return
+        return layer_mem
     sql += ' AsText(geom) from %s' % (NomeTabella)
 
     curs.execute(sql)
@@ -162,17 +165,17 @@ def CaricaInMemLaySqlite(NomeTabella,curs,ListaCodici,NomeCampoTipo,ListaCampi,d
                     polyg.Destroy()
                     feature.Destroy()
                 else:
-                    print 'unknown geometry'
-                    print row
+                    print ('unknown geometry')
+                    print (row)
 
             else:
-                print 'geometry field empty'
-                print row
+                print ('geometry field empty')
+                print (row)
 
         #return ds
         elapsed_time = time.time() - start_time
         testo='elapsed_time=%s final=%s'%(elapsed_time,fin)
-        print testo
+        print (testo)
         app.setValue(fin)
 
     else:
@@ -278,7 +281,7 @@ def CalcoloValori(FileDEM1,DBfile,app,ini,fin):
         for rec in lista:
             ListaCodici.append(rec[0])
     else:
-        print 'File ' + DBfile
+        print ('File ' + DBfile)
         errMsg ='Vulnerability table is empty !!'
         NotErr=bool()
         return NotErr, errMsg, ListaCodici, matrice, gridtipi, GridValoreStr, GridValoreCon,inNoData, AreaCella
@@ -345,8 +348,9 @@ def CalcoloValori(FileDEM1,DBfile,app,ini,fin):
 
         dst_ds = driver.CreateDataSource(nomeshpText)
         if dst_ds is None:
-            print 'Could not create file'
-            sys.exit(1)
+            NotErr=bool()
+            errMsg =  'Could not create file %s' % nomeshpText
+            return NotErr, errMsg, ListaCodici, matrice, gridtipi, GridValoreStr, GridValoreCon,inNoData, AreaCella
     else:
         drv = ogr.GetDriverByName( 'Memory' )
         dst_ds = drv.CreateDataSource( 'out' )
